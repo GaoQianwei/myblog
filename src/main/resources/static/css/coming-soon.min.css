@@ -1,0 +1,184 @@
+/*!
+ * Start Bootstrap - Coming Soon v5.0.8 (https://startbootstrap.com/themes/coming-soon)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-coming-soon/blob/master/LICENSE)
+ */html {
+	height: 100%;
+}
+
+body {
+	position: relative;
+	height: 100%;
+	min-height: 35rem;
+	font-weight: 300;
+	font-family: 'Source Sans Pro';
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 700;
+	font-family: Merriweather;
+}
+
+video {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 0;
+	width: auto;
+	height: auto;
+	min-width: 100%;
+	min-height: 100%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+@media (pointer:coarse) and (hover:none) {
+	body {
+		background: url(../img/bg-mobile-fallback.jpg) #002e66 no-repeat center center scroll;
+		background-size: cover;
+	}
+
+	body video {
+		display: none;
+	}
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background-color: #002a43;
+	opacity: .7;
+}
+
+.masthead {
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+	padding-bottom: 3rem;
+}
+
+.masthead .masthead-bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 35rem;
+	background-color: rgba(0,46,102,.8);
+	transform: skewY(4deg);
+	transform-origin: bottom right;
+}
+
+.masthead .masthead-content h1 {
+	font-size: 2.5rem;
+}
+
+.masthead .masthead-content p {
+	font-size: 1.2rem;
+}
+
+.masthead .masthead-content p strong {
+	font-weight: 700;
+}
+
+.masthead .masthead-content .input-group-newsletter input {
+	padding: 1rem;
+	height: auto;
+	font-size: 1rem;
+}
+
+.masthead .masthead-content .input-group-newsletter button {
+	padding: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	font-size: .8rem;
+}
+
+	
+.social-icons {
+	position: absolute;
+	z-index: 2;
+	margin-bottom: 2rem;
+	width: 100%;
+}
+
+.social-icons ul {
+	margin-top: 2rem;
+	width: 100%;
+	text-align: center;
+}
+
+.social-icons ul>li {
+	display: inline-block;
+	margin-right: 1rem;
+	margin-left: 1rem;
+}
+
+.social-icons ul>li>a {
+	display: block;
+	width: 4rem;
+	height: 4rem;
+	border-radius: 100%;
+	background-color: rgba(0,46,102,.8);
+	color: #fff;
+	font-size: 2rem;
+	line-height: 4rem;
+}
+
+@media (min-width:768px) {
+	.social-icons {
+		position: absolute;
+		right: 2.5rem;
+		bottom: 2rem;
+		margin: 0;
+		width: auto;
+	}
+
+	.social-icons ul {
+		margin-top: 0;
+		width: auto;
+	}
+
+	.social-icons ul>li {
+		display: block;
+		margin-right: 0;
+		margin-bottom: 2rem;
+		margin-left: 0;
+	}
+
+	.social-icons ul>li:last-child {
+		margin-bottom: 0;
+	}
+
+	.social-icons ul>li>a {
+		width: 4rem;
+		height: 4rem;
+		font-size: 2rem;
+		line-height: 4rem;
+		transition: all .2s ease-in-out;
+	}
+
+	.social-icons ul>li>a:hover {
+		background-color: #002e66;
+	}
+}
+
+.btn-secondary {
+	border-color: #cd9557;
+	background-color: #cd9557;
+}
+
+.btn-secondary:active,.btn-secondary:focus,.btn-secondary:hover {
+	border-color: #ba7c37!important;
+	background-color: #ba7c37!important;
+}
+
+.input {
+	font-weight: 300!important;
+}
