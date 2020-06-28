@@ -13,6 +13,9 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+
+
+
 </head>
 <body>
 <header class="lyear-header text-center" style="background-image:url(../images/left-bg.jpg);">
@@ -65,7 +68,7 @@
         <!-- 文章列表 -->
         <div class="col-xl-8">
 
-			<h1>用户列表</h1>
+			<h1 id="listname">用户列表</h1>
 			
 			<div class="table-responsive">
 			  <table class="table">
@@ -96,7 +99,10 @@
 			    </tbody>
 			  </table>
 			</div>
-			
+
+			<div>
+				<button type="button" id="abutton">我是一个按钮</button>
+			</div>
           
 
           <!-- 分页 -->
@@ -137,9 +143,18 @@
     <!-- end container -->
   </section>
 </div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.min.js"></script>
 </body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.nicescroll.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/main.min.js"></script>
+<script type="text/javascript">
+	console.log("初始化");
+	jQuery(document).ready(function(){
+		jQuery("#abutton").click(function () {
+			console.log("我的按钮");
+			jQuery("#abutton").hide();
+		})
+	});
+</script>
 </html>
