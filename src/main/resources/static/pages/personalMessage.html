@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息管理</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
+    <tr style="line-height: 20px">
+     <font style="line-height:1.25rem" >
+ </head>
+
+<tbody>
+<form action="" method="get">
+    <table class="table"  style="border-collapse: separate;border-spacing: 40px 5rem;">
+        <tr>
+            <td>头像:</td>
+            <td>
+                <input type="file" name="head" id="head" style="height: 3.1875rem;width: 449px" />
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>签名:</td>
+            <td>
+                <textarea name="info" id="info_1" rows="1" cols="80"></textarea>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>性别:</td>
+            <td>
+                <input type="radio" name="u_sex" id="body" value="男" checked="checked"  />男
+                <input type="radio" name="u_sex" id="girl" value="女" />女
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>生日:</td>
+            <td>
+                <!-- 使用其他控件代替 -->
+                <input type="date" name="u_bir" id="u_bir" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>邮箱:</td>
+            <td>
+                <input type="text" name="u_name" id="u_name" style="height: 3.1875rem;width: 449px" cols="80" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>个人说明:</td>
+            <td>
+                <textarea name="info" id="info_2" rows="5" cols="80"></textarea>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <button  type="button" class="btn btn-info" style="margin-left: 1.25rem;" onclick="updateButton()">修改</button>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+<!-- 修改的模态框 -->
+<div class="modal fade" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit_id">
+                <form class="form-horizontal">
+                    <div class="form-group form-group-lg">
+                        <label class="control-label col-lg-2">签名:</label>
+                        <div class="col-lg-8">
+                            <input type="text" name="no" id="no" class="form-control"
+                                   placeholder="请输入签名">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <label class="control-label col-lg-2">邮箱:</label>
+                        <div class="col-lg-8">
+                            <input type="text" name="name" id="name" class="form-control"
+                                   placeholder="请输入邮箱">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <label class="control-label col-lg-2">性别:</label>
+                        <div class="col-lg-8">
+                            <select name="sex" id="sex" class="form-control">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="doEdit()">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+</tbody>
+
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    jQuery(function() {
+        jQuery.post("/all",function(rst){
+            var body="";
+            var json=rst;
+            body+="<tr>";
+            body+="<td>"+json.signature+"</td>";
+            document.getElementById("info_1").innerHTML=rst.signature;
+            document.getElementById("u_name").innerHTML=rst.email;
+
+            jQuery("#tbody").html(body);
+        },"json");
+    });
+
+    function showEditModal(id,name,no,sex)
+    {
+        jQuery("#edit_id").val(id);
+        jQuery("#no").val(no);
+        jQuery("#name").val(name);
+        jQuery("#sex").val(sex);
+        jQuery("#editModal").modal("show");
+    }
+
+    function updateButton() {
+
+        showEditModal(id,name,no,sex);
+    }
+
+    function doEdit() {
+        jQuery("#editModal").modal("hide");
+        //获取数据
+        var id=jQuery("#edit_id").val();
+        var no=jQuery("#no").val();
+        var name=jQuery("#name").val();
+        var sex=jQuery("#sex").val();
+        jQuery.post("/edit",{"id":id,"name":name,"sex":sex,"no":no},function (rst) {
+            alert(rst);
+            if(rst=="修改成功")
+            {
+                location.reload();
+            }
+        })
+    }
+</script>
+</html>
