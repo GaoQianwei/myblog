@@ -26,7 +26,7 @@ public class SignController {
         return list;
     }
 
-    @RequestMapping("/insert")
+    @RequestMapping("/signup")
     public boolean insert(@RequestParam Map<String,String> js){
         boolean flag = signService.insert(js);
         return flag;

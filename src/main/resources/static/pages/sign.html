@@ -125,7 +125,7 @@
 	$(document).ready(function () {
 		$("#signup").click(function () {
 			let js = signup();
-			jQuery.post("/insert", js, function (rst) {
+			jQuery.post("/signup", js, function (rst) {
 				if (rst == true)
 					alert("注册成功")
 				else
