@@ -68,14 +68,14 @@ public class CommentService {
     }
 
     public Map<String,Object> findById(Map<String,String> map){
-        Map<String,Object> tea=null;
+        Map<String,Object> com=null;
         try {
             int id=Integer.parseInt(map.get("id"));
-            tea=commentMapper.findById(id);
+            com=commentMapper.findById(id);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        return tea;
+        return com;
     }
 }
 

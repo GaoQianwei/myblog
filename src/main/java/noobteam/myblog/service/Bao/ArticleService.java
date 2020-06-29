@@ -68,13 +68,13 @@ public class ArticleService {
     }
 
     public Map<String,Object> findById(Map<String,String> map){
-        Map<String,Object> tea=null;
+        Map<String,Object> art=null;
         try {
             int id=Integer.parseInt(map.get("id"));
-            tea=articleMapper.findById(id);
+            art=articleMapper.findById(id);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        return tea;
+        return art;
     }
 }
