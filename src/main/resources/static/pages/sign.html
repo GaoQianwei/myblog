@@ -109,6 +109,7 @@
 			let pwd=jQuery("#pass_in").val();
 			jQuery.post("/signin",{"name":name,"pwd":pwd},function(rst) {
 				//alert("name:"+name + "\npwd:" +pwd);
+				/** 将验证阶段交给控制层
 				let flag = 0;
 				rst.forEach(function (map) {
 					if(map.name==name && map.code==pwd)
@@ -118,6 +119,11 @@
 				if(flag==1)
 					msg = "登录成功"
 				alert(msg);
+				 **/
+				let msg = "登录失败"
+				if(rst == true)
+					msg = "登录成功"
+				alert(msg);
 			});
 		})
 	});
@@ -125,7 +131,7 @@
 	$(document).ready(function () {
 		$("#signup").click(function () {
 			let js = signup();
-			jQuery.post("/insert", js, function (rst) {
+			jQuery.post("/signup", js, function (rst) {
 				if (rst == true)
 					alert("注册成功")
 				else
