@@ -75,8 +75,8 @@
             <div class="arc-header">
               <h3 class="arc-title">访问权限管理</h3>
 				<div>——————————————————————————————</div>
-				<h5> <a href="" >仅好友可访问</a></h5>
-				<h5> <a href="" >任何人可访问</a></h5>
+				<h5> <a href="#" class="prmsset">仅好友可访问</a></h5>
+				<h5> <a href="#" class="prmsset">任何人可访问</a></h5>
 				
             </div>
 
@@ -125,5 +125,18 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script>
+    $(function () {
+        $("a.prmsset").click(function () {
+            var msg="allallowed";
+            if($(this).text()=="仅好友可访问"){
+                msg="frdallowed";
+            }
+            $.post("/prmssetctlr",{"prmsset":msg,"no":1231231},function (rst) {
+                alert(rst);
+            });
+        });
+    });
+</script>
 </body>
 </html>
