@@ -23,14 +23,25 @@ public class SignService {
         return list;
     }
 
+    public boolean updateUsr_stus(Map<String,String> js){
+        boolean flag = false;
+        try {
+            flag = signMapper.updateUsr_stus(js);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    //signup
     public boolean insert(Map<String,String> js){
         boolean flag = false;
         try {
             boolean f1 = signMapper.insertemail(js);
             boolean f2 = signMapper.insertpwd(js);
             boolean f3 = signMapper.insertname(js);
-            flag = f1 && f2;
-            flag = flag && f3;
+            boolean f4 = signMapper.insertNotoUsr_stus(js);
+            flag = f1 && f2 && f3 && f4;
         } catch (Exception e) {
             e.printStackTrace();
         }
