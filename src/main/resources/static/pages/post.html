@@ -16,48 +16,6 @@
 <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
 </head>
 <body>
-<header class="lyear-header text-center" style="background-image:url(images/left-bg.jpg);">
-  <div class="lyear-header-container">
-    <div class="lyear-mask"></div>
-    <h1 class="lyear-blogger pt-lg-4 mb-0"><a href="index.html">笔下光年的博客</a></h1>
-    <nav class="navbar navbar-expand-lg">
-    <a class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="lyear-hamburger">
-        <div class="hamburger-inner"></div>
-      </div>
-    </a>
-    
-    <div id="navigation" class="collapse navbar-collapse flex-column">
-	  <div class="profile-section pt-3 pt-lg-0">
-	    <img class="profile-image mb-3 rounded-circle mx-auto" src="../images/lyear.png" width="120" height="120" alt="笔下光年" >
-	    <div class="lyear-sentence mb-3">必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。</div>
-        <hr>
-	  </div>
-	  
-	  <ul class="navbar-nav flex-column text-center">
-	    <li class="nav-item active">
-          <a class="nav-link" href="index.html">首页</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link" href="index.html">技术</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link" href="index.html">感悟</a>
-	    </li>
-	    <li class="nav-item">
-	      <a class="nav-link" href="about.html">关于我</a>
-	    </li>
-	  </ul>
-	  
-	  <div class="my-2 my-md-3">
-        <form class="lyear-search-form form-inline justify-content-center pt-3">
-          <input type="email" id="semail" name="semail1" class="form-control mr-md-1" placeholder="搜索关键词" />
-        </form>
-	  </div>
-	</div>
-  </nav>
-  </div>
-</header>
 <div class="lyear-wrapper">
   <section class="mt-5 pb-5">
     <div class="container">
@@ -239,27 +197,6 @@ export  $initHighlight;
                 
                 <form action="#" method="post" class="mt-4 lyear-comment-form">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input id="author" class="form-control" placeholder="昵称*" name="author" type="text" required="" />
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input id="email" class="form-control" placeholder="邮箱*" name="email" type="text" required="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <input id="subject" class="form-control" placeholder="网址" name="subject" type="text" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
                       <textarea id="comment" class="form-control" rows="5" placeholder="想说的内容" name="comment" required=""></textarea>
@@ -270,7 +207,8 @@ export  $initHighlight;
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <button name="submit" type="submit" id="submit" class="btn btn-primary">发表评论</button>
+                      <button type="button" id="btn_com" class="btn btn-primary">发表评论</button>
+                        <button type="button" id="com_reset" class="btn btn-primary">重置</button>
                       <input type='hidden' name='comment_arc_id' value='1' id='comment_arc_id' />
                       <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
                     </div>
@@ -342,5 +280,45 @@ export  $initHighlight;
 <script type="text/javascript" src="../js/highlight/highlight.pack.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(e){
+        $("#com_reset").click(function(){
+            $("#comment").val('');
+        });
+    });
+
+    jQuery(function(){
+        jQuery("#btn_com").click(function(){
+            var now = new Date();
+            var year=now.getFullYear();
+            var month=now.getMonth()+1;
+            var date=now.getDate();
+            var hour=now.getHours();
+            var minute=now.getMinutes();
+            if (month<10)
+                month="0"+month;
+            if (date<10)
+                date="0"+date;
+            if (hour<10)
+                hour="0"+hour;
+            if (minute<10)
+                minute="0"+minute;
+            var time=year+"-"+month+"-"+date+" "+hour+":"+minute;
+            var art_target="8";
+            var usr_target="1000000009";
+            var comment=jQuery("#comment").val();
+            jQuery.post("/com_save",{"date":time,"text":comment,"usr_target":usr_target,"art_target":art_target},function(rst){
+                alert(rst);
+                if(rst=='发表成功')
+                {
+                    location.reload();
+                }
+            });
+
+        });
+    });
+</script>
 </body>
 </html>
