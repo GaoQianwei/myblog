@@ -17,8 +17,8 @@ public interface CommentMapper {
             "value(#{com.date},#{com.text},#{com.usr_target},#{com.art_target})")
     public int save(@Param("com") Map<String,String> map);
 
-    @Update("update test " +
-            " set target=#{t.target},link=#{t.link},date=#{t.date}" +
+    @Update("update comment " +
+            " set date=#{t.date},text=#{t.text},usr_target=#{t.usr_target},art_target=#{t.art_target}" +
             " where id=#{t.id}")
     public int update(@Param("t") Map<String,String> tea);
 

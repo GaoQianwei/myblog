@@ -210,32 +210,35 @@ i[class*='mdi'] {
 .lyear-header .nav-link:hover {
     color: rgba(255, 255, 255, 1);
 }
+
 /* 搜索框 */
 .search-box{
     position: absolute;
     top:30px;
-    left:85%;
+    left:80%;
     transform: translate(-50%,-50%);
     background: #2f3640;
-    height: 40px;
-    border-radius: 40px;
-    padding: 10px;
+    height: 60px;
+    border-radius: 60px;
+    padding: 15px;
 }
 .search-box:hover>.search-txt{
     width: 240px;
     padding: 0 6px;
 }
 .search-box:hover>.search-btn{
-   background: white;
+    background: white;
 }
 .search-btn{
-    color: #008800;
+    color: #e84118;
     float:right ;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #2f3640;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .search-txt{
     border: none;
@@ -246,15 +249,9 @@ i[class*='mdi'] {
     color: white;
     font-size: 16px;
     transition: 0.4s;
-    line-height: 20px;
+    line-height: 30px;
     width: 0px;
 }
-
-
-
-
-
-
 
 /* --------------------------------- *
  * 右侧

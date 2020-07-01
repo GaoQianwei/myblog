@@ -17,12 +17,12 @@ public interface ArticleMapper {
             "value(#{art.target},#{art.link},#{art.date})")
     public int save(@Param("art") Map<String,String> map);
 
-    @Update("update test " +
+    @Update("update article " +
             " set target=#{t.target},link=#{t.link},date=#{t.date}" +
             " where id=#{t.id}")
     public int update(@Param("t") Map<String,String> tea);
 
-    @Delete("delete from test where id=#{id}")
+    @Delete("delete from article where id=#{id}")
     public int delete(int id);
 
 }
