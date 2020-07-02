@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>《人物》</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
+    <style type="text/css">
+        p{
+            font-family: tahoma,geneva,sans-serif;
+            font-size: 40px;
+            text-align: center;
+        }
+        td{
+            color: ;
+        }
+        table{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<!--
+   <input type="file" name="inputfile" accept="image/*" width="50px" height="50px" onchange="readFile(this.files[0])"/>
+   <div id="preview"></div>>
+-->
+<p>人物照片墙</p>
+<div id="containerT">
+    <form class="form-horizontal">
+        <div class="form-group form-group-lg text-center">
+            <button  type="button" class="btn btn-info" id="addfhoto" style="margin-left: 1.25rem;" onclick="addFhoto()">添加照片</button>
+            <button  type="button" class="btn btn-info" id="getback" style="margin-left: 1.25rem;" onclick="getBack()">返回相册页</button>
+        </div>
+    </form>
+</div>
+
+<div id="container">
+    <table class="table table-bordered table-striped table-hover">
+
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    /**
+     *
+
+        function readFile(f) {
+            var reader=new FileReader();
+            reader.readAsDataURL(f);
+            reader.onload=function () {
+                var preview=document.querySelector('#preview');
+                var img=document.createElement("img");
+                img.src=reader.result;
+                preview.appendChild(img);
+            }
+            reader.onerror=function (e) {
+                console.log("Error"+e);
+            }
+
+        }
+
+    * @param f
+    */
+
+    jQuery(function () {
+
+        //页面加载完毕，就去数据库中获取数据
+        //          /all 请求的地址
+        jQuery.post("/allPH",function(rst){//处理响应的结果
+            var body='';
+            for(var i=0;i<rst.length;i++)
+            {
+                var json=rst[i];//{"id":1,"cllection":"human","store":}
+                var type=json.collection;
+                var path=json.store;
+                var description=json.note;
+
+                if(type=="human") {
+
+                    body += '<tr>';
+                    body += "<td>" + description + "</td>";
+                    body += '<td>' + '<img src="' + path + '" style="" alt="加载失败" title="存储在'+path+'">' + '</td>';
+                    body+='<td>' + "<a href='#' onclick='deleteThePhoto(\""+json.id+"\")'>删除</a>"+ '</td>';
+                    body += '</tr>';
+                }
+
+                //body+="<td>"+json.data+"</td>";
+                //body+="<td>"+json.text+"</td>";
+                //body+="<td>"+json.visit_tar+"</td>";
+            }
+            jQuery("#tbody").html(body);
+        },"json");//表示返回数据的格式
+    })
+
+    function  deleteThePhoto(id) {
+
+        jQuery.post("/deletePH",{"id":id},function(rst){
+            alert(rst);
+            //如果删除成功，重新加载数据
+            if(rst=='删除成功')
+            {
+                //重新加载本页面
+                location.reload();
+            }
+        });
+    }
+
+    function addFhoto() {
+
+    }
+    
+    function  getBack() {
+        window.location.href="photoAlbum.html";
+    }
+
+</script>
+</html>

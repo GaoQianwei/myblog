@@ -75,48 +75,9 @@
             <div class="arc-header">
               <h3 class="arc-title">好友推荐</h3>
 				<div>————————————————————————————</div>
-<table class="table table-bordered table-striped table-hover">
+<table class="table table-bordered table-striped table-hover text-center">
 				<tbody>
-					<tr>						
-						<td>
-							璐姐
-						</td>
-						<td><a href="#"><img class="profile-image mb-3 mx-auto" src="../images/lyear.png" width="25" height="25"  ></a></td>
-						<td>
-							<a href="">查看空间</a>
-							<a href="">添加好友</a>
-						</td>
-					</tr>
-					<tr>						
-						<td>
-							军哥
-						</td>
-						<td><a href="#"><img class="profile-image mb-3 mx-auto" src="../images/lyear.png" width="25" height="25"  ></a></td>
-						<td>
-							<a href="">查看空间</a>
-							<a href="">添加好友</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							勇哥
-						</td>
-						<td><a href="#"><img class="profile-image mb-3 mx-auto" src="../images/lyear.png" width="25" height="25"  ></a></td>
-						<td>
-							<a href="">查看空间</a>
-							<a href="">添加好友</a>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							强哥
-						</td>
-						<td><a href="#"><img class="profile-image mb-3 mx-auto" src="../images/lyear.png" width="25" height="25"  ></a></td>
-						<td>
-							<a href="">查看空间</a>
-							<a href="">添加好友</a>
-						</td>
-					</tr>
+
 				</tbody>
 
 			</table>
@@ -147,12 +108,16 @@
             <!-- 归档 -->
             <aside class="widget">
               <div class="widget-title"><a href="visitset.html">访问管理</a></div>
-              
             </aside>
 			<aside class="widget">
               <div class="widget-title"><a href="decorate.html">装扮设置</a></div>
-              
             </aside>
+              <aside class="widget">
+                  <div class="widget-title"><a href="decorate.html">好友动态</a></div>
+              </aside>
+              <aside class="widget">
+                  <div class="widget-title"><a href="decorate.html">好友列表</a></div>
+              </aside>
             <!-- 标签 -->
 
           </div>
@@ -168,5 +133,28 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script>
+	jQuery(function(){
+		jQuery.post("/getrec",function(rst){//处理响应的结果
+			var body="";
+
+			for(var i=0;i<rst.length;i++)
+			{
+				var json=rst[i];//{"tea_id":1,"tea_name":"zhagnsan","tea_sex":'',"tea_no":""}
+				body+="<tr>";
+				body+="<td>"+json.id+"</td>";
+				body+="<td>"+json.dectype+"</td>";
+				body+="<td>"+json.prmsset+"</td>";
+				body+="<td>";
+				body+="<a href='#' >添加好友</a>&nbsp;&nbsp;";
+				body+="<a href='#' >查看空间</a>";
+				body+="</td>"
+				body+="</tr>";
+			}
+			jQuery("tbody").html(body);
+		},"json");
+
+	});
+</script>
 </body>
 </html>

@@ -16,13 +16,19 @@ public class perInformationController {
     @Resource
     private perInformationService perInformationService;
 
-    @RequestMapping("/editPersonalInformation")
-    public String update(@RequestParam Map<String,String> map){
+    @RequestMapping("/editPI")
+    public String update(@RequestParam Map<String,String> tea){
         String msg="修改失败";
-        boolean flag=perInformationService.doUpdate(map);
+        boolean flag=perInformationService.doUpdate(tea);
         if(flag){
             msg="修改成功";
         }
         return msg;
+    }
+
+    @RequestMapping("/allPI")
+    public List<Map<String,Object>> findAll(){
+        List<Map<String,Object>> list=perInformationService.findAll();
+        return list;
     }
 }
