@@ -39,4 +39,19 @@ public class perInfomationMapperTest {
         int n=perinfomationMapper.save(map);
         System.out.println(n);
     }
+
+    @Test
+    public void update() {
+
+        Map<String,String> tea=new HashMap<>();
+        tea.put("id","2");
+        tea.put("signature","回来了");
+        tea.put("sex","女");
+        tea.put("birth","1001");
+        tea.put("email","298979@qq.com");
+        tea.put("description","没啥想说的");
+        tea.put("mood","hhh");
+        int n=perinfomationMapper.update(tea);
+        assertEquals(1,n);
+    }
 }

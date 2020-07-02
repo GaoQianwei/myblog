@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>相册管理页</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        p{
+            font-family: tahoma,geneva,sans-serif;
+            font-size: 24px;
+            text-align: center;
+        }
+        td{
+            color:;
+        }
+        table{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body style="background-color: white;">
+<p>我的相册</p>
+<table align="center">
+    <tr>
+        <td><img src="/images/human.jpg" alt="" title="点击封面进入《人物》相册" onclick="jumpHuman()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+        <td><img src="/images/animal.jpg" alt="" title="点击封面进入《动物》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+        <td><img src="/images/scenery.jpg" alt="" title="点击封面进入《自然风景》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+    </tr>
+    <tr align="center" >
+        <td name="11" style="margin-left: 50px">人物</td>
+        <td name="12" style="margin-left: 50px">动物</td>
+        <td name="13" style="margin-left: 50px">自然风景</td>
+    </tr>
+
+    <tr>
+        <td><img src="/images/place.jpg" alt="" title="点击封面进入《建筑古迹》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;;"></td>
+        <td><img src="/images/example.jpg" alt="" title="点击封面进入《二次元》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+        <td><img src="/images/other.jpg"  alt="" title="点击封面进入《其它》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+    </tr>
+    <tr align="center" >
+        <td name="21" style="margin-left: 50px">建筑古迹</td>
+        <td name="22" style="margin-left: 50px">二次元</td>
+        <td name="23" style="margin-left: 50px">其它</td>
+    </tr>
+
+</table>
+</body>
+
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    function jumpHuman() {
+
+        window.location.href="photo_human.html";
+    }
+
+
+</script>
+</html>

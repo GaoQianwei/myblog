@@ -13,10 +13,10 @@ public class perInformationService {
     @Resource
     private perInfomationMapper perInfomationMapper;
 
-    public boolean doUpdate(Map<String,String> map){
+    public boolean doUpdate(Map<String,String> tea){
         boolean flag=false;
         try {
-            double r=perInfomationMapper.update(map);
+            double r=perInfomationMapper.update(tea);
             if(r>0){
                 flag=true;
             }
@@ -24,6 +24,16 @@ public class perInformationService {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    public List<Map<String,Object>> findAll(){
+        List<Map<String,Object>> list=null;
+        try {
+            list=perInfomationMapper.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 

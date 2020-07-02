@@ -30,7 +30,7 @@ public class perInformationControllerTest {
     public void update() throws Exception{
 
         MockHttpServletRequestBuilder builder=
-                MockMvcRequestBuilders.post("/save")
+                MockMvcRequestBuilders.post("/savePI")
                         .param("id","2")
                         .param("signature","2233");
         MvcResult rst=mockMvc.perform(builder).andReturn();
