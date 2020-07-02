@@ -63,8 +63,7 @@
   </nav>
   </div>
 </header>
-<div class="lyear-wrapper" style=" background-attachment: fixed;background-position:right top;background-size: 77% 100%;
-">
+<div class="lyear-wrapper" style="background-image:url(../images/blog/post-1.png);background-repeat:no-repeat;background-attachment: fixed;background-position:right top;background-size: 77% 100%;">
   <section class="mt-5 pb-5">
     <div class="container">
 
@@ -92,19 +91,12 @@
 				<div class="arc-preview">
 				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
-				
+
             </div>
 
            
           </article>
 
-          
-
-
-
-          <!-- 分页 -->
-          
-          <!-- 分页 end -->
         </div>
         <!-- 内容 end -->
 
@@ -156,6 +148,7 @@
             if(rst=="type3") currentImage="../images/blog/post-1.png";
             if(rst=="type4") currentImage="../images/blog/timg.png";
             $("div.lyear-wrapper").css("background-image","url("+currentImage+")");
+
         });
 
         $("a.typeset").click(function(){
@@ -166,9 +159,10 @@
             if(typemsg=="type3") currentImage="../images/blog/post-1.png";
             if(typemsg=="type4") currentImage="../images/blog/timg.png";
             $.post("/dectlr",{"dectype":typemsg,"no":1231231},function (rst) {
-                    alert(rst);
+                alert(rst);
             });
             $("div.lyear-wrapper").css("background-image","url("+currentImage+")");
+
 
         });
 
