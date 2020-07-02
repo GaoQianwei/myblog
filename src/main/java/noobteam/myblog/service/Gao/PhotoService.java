@@ -1,22 +1,22 @@
 package noobteam.myblog.service.Gao;
-import noobteam.myblog.mapper.Gao.MessageBoardMapper;
+
+import noobteam.myblog.mapper.Gao.PhotoMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.List;
 @Service
-public class MessageBoardService {
-
+public class PhotoService {
     @Resource
-    private MessageBoardMapper messageBoardMapper;
+    private PhotoMapper photoMapper;
 
     public boolean doSave(Map<String, String> map) {
         boolean flag = false;
         //选择要添加监控的代码
         //ctrl+alt+t 打开 surround with窗口 选择 try catch
         try {
-            int r = messageBoardMapper.save(map);
+            int r = photoMapper.save(map);
             if (r > 0) {
                 flag = true;
             }
@@ -31,7 +31,7 @@ public class MessageBoardService {
         boolean flag=false;
         try {
             int id=Integer.parseInt(map.get("id"));
-            int r=messageBoardMapper.delete(id);
+            int r=photoMapper.delete(id);
             if(r>0){
                 flag=true;
             }
@@ -45,7 +45,7 @@ public class MessageBoardService {
     public boolean doUpdate(Map<String,String> map){
         boolean flag=false;
         try {
-            double r=messageBoardMapper.update(map);
+            double r=photoMapper.update(map);
             if(r>0){
                 flag=true;
             }
@@ -57,7 +57,7 @@ public class MessageBoardService {
     public List<Map<String,Object>> findAll(){
         List<Map<String,Object>> list=null;
         try {
-            list=messageBoardMapper.findAll();
+            list=photoMapper.findAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,10 +68,11 @@ public class MessageBoardService {
         Map<String,Object> tea=null;
         try {
             int id=Integer.parseInt(map.get("id"));
-            tea=messageBoardMapper.findById(id);
+            tea=photoMapper.findById(id);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return tea;
     }
+
 }

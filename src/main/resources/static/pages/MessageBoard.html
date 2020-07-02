@@ -4,15 +4,72 @@
     <meta charset="UTF-8">
     <title>留言板管理页面</title>
     <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+
+        p{
+            font-family: tahoma,geneva,sans-serif;
+            font-size: 24px;
+            text-align: center;
+        }
+        td{
+            color: ;
+        }
+        table{
+            margin-top: 30px;
+        }
+    </style>
 
 </head>
 <body>
+<p>留言板</p>
+    <!--
+        containerT中是留言板的输入与留言的部分，
+        由于部分id会与container中的id重合，故在其后加了大写字母'T'
+    -->
+
+<div id="containerT">
+    <form action="/save" method="post" class="form-horizontal">
+        <div class="form-group form-group-lg">
+            <label class="control-label col-lg-2">日期:</label>
+            <div class="col-lg-8">
+                <input type="text" name="no" id="noT" class="form-control" disabled="true"
+                       placeholder="请输入日期">
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <label class="control-label col-lg-2">内容:</label>
+            <div class="col-lg-8">
+                <input type="text" name="name" id="nameT" class="form-control"
+                       placeholder="请输入留言内容">
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <label class="control-label col-lg-2">昵称:</label>
+            <div class="col-lg-8">
+                <input type="text" name="sex" id="sexT" class="form-control"
+                       placeholder="请输入您的昵称">
+            </div>
+        </div>
+        <div class="form-group form-group-lg text-center">
+            <button type="button" id="btn_reg" class="btn btn-lg btn-info">留言</button>
+            <button type="reset" class="btn btn-lg btn-danger">重置</button>
+        </div>
+    </form>
+</div>
+
+    <!--
+        container展示以往留言板中的信息————日期、内容、留言者
+
+        提供删除和修改的功能
+
+    -->
+
 <div id="container">
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
             <td>日期</td>
-            <td>内容</td>
+            <td>留言内容</td>
             <td>留言者</td>
             <td>操作</td>
         </tr>
@@ -55,7 +112,7 @@
                     <div class="form-group form-group-lg">
                         <label class="control-label col-lg-2">日期:</label>
                         <div class="col-lg-8">
-                            <input type="text" name="no" id="no" class="form-control"
+                            <input type="text" name="no" id="no" class="form-control" disabled="true"
                                    placeholder="请输入留言日期">
                         </div>
                     </div>
@@ -83,11 +140,59 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <span id="reg_msg"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="closeDilog">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 </body>
 <script src="/jquery/jquery-3.4.1.min.js"></script>
 <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     jQuery(function(){
+
+        /**
+         * 下面三行代码的功能是获取系统日期
+         * 然后传给留言板作为不可更改的默认日期
+         * @type {Date}
+         */
+
+        var today=new Date();
+        var submitTime=today.getFullYear()+'.'+(today.getMonth()+1)+'.'+today.getDate();
+        $("#noT").attr('value',submitTime);
+
+        jQuery("#btn_reg").click(function(){
+            var name=jQuery("#nameT").val();
+            var no=jQuery("#noT").val();
+            var sex=jQuery("#sexT").val();
+            jQuery.post("/saveMB",{"name":name,"no":no,"sex":sex},function(rst){
+                jQuery("#reg_msg").html(rst);
+                jQuery('#myModal').modal("show");
+
+            });
+        });
+        jQuery("#closeDilog").click(function(){
+            var rst=jQuery("#reg_msg").html();
+            if(rst=='留言成功')
+            {
+                //跳转页面
+                window.location.href="MessageBoard.html";
+            }
+        });
+
+
         //页面加载完毕，就去数据库中获取数据
         //          /all 请求的地址
         jQuery.post("/allMB",function(rst){//处理响应的结果

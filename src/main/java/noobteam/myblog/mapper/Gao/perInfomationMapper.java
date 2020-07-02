@@ -16,7 +16,7 @@ public interface perInfomationMapper {
     public int save(@Param("mes") Map<String, String> map);
 
     @Update("update per_infomation " +
-            " set signature=#{t.signature},sex=#{t.sex},birth=#{t.birth},email=#{t.email},description=#{t.description},mood=#{t.mood}" +
+            " set signature=#{t.signature},sex=#{t.sex},birth=#{t.birth},email=#{t.email},description=#{t.description}" +
             " where id=#{t.id}")
     public int update(@Param("t") Map<String,String> tea);
 }
