@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>添加</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+    <script src="../js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script type="text/javascript">
+
+        jQuery(function(){
+            var target="1111111111";
+            jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
+                var pageCount = rst.length%5 == 0 ? rst.length/5 : (rst.length/5+1);
+                var codePage = "";
+                alert(pageCount);
+                for (var j=-1; j<=3; j++) {
+                    if(j > pageCount && j > 5){
+                        codePage +=
+                            "<li><a id='"+(j-5)+"' onclick='pages("+(j-5)+");rows("+(j-5)+");'>"+(j-5)+"</a></li>";
+                    }
+                }
+                for (var j=-1; j<=3; j++) {
+                    if(j >= 1 && j <= pageCount) {
+                        codePage +=
+                            "<li><a id='"+j+"' onclick='pages("+j+");rows("+j+");'>"+j+"</a></li>";
+                    }
+                }
+                for (var j=-1; j<=3; j++) {
+                    if(j < 1 && j+5 <= pageCount){
+                        codePage +=
+                            "<li><a id='"+(j+5)+"' onclick='pages("+(j+5)+");rows("+(j+5)+");'>"+(j+5)+"</a></li>";
+                    }
+                }
+                jQuery("#page-size").html(codePage);
+            },"json");//表示返回数据的格式
+        });
+    </script>
 </head>
 <body>
+<div class="search-box">
+    <input type="text" autocomplete="off" id="search" name="search" class="search-txt" placeholder="搜索关键词" />
+    <a class="search-btn" href="#">
+        <i class="fas fa-search"></i>
+    </a>
+</div>
+<div class="container">
+    <div class="row">
 
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
+            <form class="form-horizontal">
+                <div id="tbody">
+                </div>
+            </form>
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination pagination-lg" id="page-size">
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+

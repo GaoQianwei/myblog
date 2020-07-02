@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/htmleaf-demo.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-markdown.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+
+</head>
+<body>
+<div class="htmleaf-container">
+	<div class="container" >
+		<div class="widget-title" style="font-size: 30px">日志发表
+			<a style="float: right;font-size: 20px" href="artlist.html"> 返回</a>
+		</div>
+		<div class="form-group form-group-lg">
+			<label class="col-sm-1 control-label" style="text-align: center;font-size: 20px;">标题</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control" id="title" placeholder="请输入文章标题">
+			</div>
+		</div>
+		<div>
+			<tr>
+				&emsp;
+			</tr>
+		</div>
+		<div class="form-group form-group-lg">
+			<label class="col-sm-1 control-label" style="text-align: center;font-size: 20px;vertical-align: center;">摘要</label>
+			<div class="col-sm-11">
+				<textarea class="form-control" id="summary" placeholder="请输入文章摘要" ></textarea>
+			</div>
+		</div>
+		<div>
+			<tr>
+				&emsp;
+			</tr>
+		</div>
+		<div>
+			<textarea id="editor-zh" name="content" rows="10"></textarea>
+		</div>
+		<div class="form-group form-group-lg" style="float: right;">
+			<button type="button" id="btn_art" class="btn btn-primary">发表</button>
+			<button type="button" id="art_reset" class="btn btn-primary">删除</button>
+		</div>
+	</div>
+</div>
+<div>
+	<section class="mt-5 pb-5">
+		<div class="container">
+
+			<div class="row">
+				<!-- 文章列表 -->
+				<div class="col-xl-8" id="ak">
+
+				</div>
+				<!-- 内容 end -->
+			</div>
+		</div>
+		<!-- end container -->
+	</section>
+</div>
+
+<script src="../js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="../js/bootstrap-markdown.zh.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#editor-zh").markdown({language:'zh'})
+	})
+
+	$(document).ready(function(e){
+		$("#art_reset").click(function(){
+			$("#editor-zh").val('');
+		});
+	});
+
+	jQuery(function(){
+		jQuery("#btn_art").click(function(){
+			var now = new Date();
+			var year=now.getFullYear();
+			var month=now.getMonth()+1;
+			var date=now.getDate();
+			if (month<10)
+				month="0"+month;
+			if (date<10)
+				date="0"+date;
+			var time=year+"-"+month+"-"+date;
+			var target="1000000009";
+			var tittle=jQuery("#title").val();
+			var summary=jQuery("#summary").val();
+			var details=jQuery("#editor-zh").val();
+			jQuery.post("/art_save",{"tittle":tittle,"summary":summary,"details":details,"target":target,"date":time},function(rst){
+				alert(rst);
+				if(rst=='发表成功')
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
+
+</script>
+</body>
+</html>
