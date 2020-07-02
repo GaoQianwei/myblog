@@ -1,5 +1,6 @@
 package noobteam.myblog.controller.Gao;
-import noobteam.myblog.service.Gao.MessageBoardService;
+
+import noobteam.myblog.service.Gao.PhotoService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,17 +10,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class MessageBoardController {
+public class PhotoController {
     @Resource
-    private MessageBoardService messageBoardService;
+    private PhotoService photoService;
 
     /**
      * 通过RequestMapping设置该方法，请求的路径
      * @return
      */
-    @RequestMapping("/allMB")
+    @RequestMapping("/allPH")
     public List<Map<String,Object>> findAll(){
-        List<Map<String,Object>> list=messageBoardService.findAll();
+        List<Map<String,Object>> list=photoService.findAll();
         return list;
     }
     /**
@@ -30,10 +31,10 @@ public class MessageBoardController {
      * @param map
      * @return
      */
-    @RequestMapping("/saveMB")
+    @RequestMapping("/savePH")
     public String save(@RequestParam Map<String,String> map){
         String msg="注册失败";
-        boolean flag=messageBoardService.doSave(map);
+        boolean flag=photoService.doSave(map);
         if(flag){
             msg="注册成功";
         }
@@ -45,20 +46,20 @@ public class MessageBoardController {
      * @param map
      * @return
      */
-    @RequestMapping("/deleteMB")
+    @RequestMapping("/deletePH")
     public String delete(@RequestParam Map<String,String> map){
         String msg="删除失败";
-        boolean flag=messageBoardService.doDelete(map);
+        boolean flag=photoService.doDelete(map);
         if(flag){
             msg="删除成功";
         }
         return msg;
     }
 
-    @RequestMapping("/editMB")
+    @RequestMapping("/editPH")
     public String update(@RequestParam Map<String,String> map){
         String msg="修改失败";
-        boolean flag=messageBoardService.doUpdate(map);
+        boolean flag=photoService.doUpdate(map);
         if(flag){
             msg="修改成功";
         }

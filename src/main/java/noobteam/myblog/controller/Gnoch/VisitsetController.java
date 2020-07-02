@@ -26,4 +26,17 @@ public class VisitsetController {
         if(r) msg="修改成功";
         return msg;
     }
+
+    @RequestMapping("/dectlr")
+    public String decset(@RequestParam Map<String,String> map){
+        String msg="修改失败";
+        boolean r=visitsetService.dodecset(map);
+        if(r) msg="修改成功";
+        return msg;
+    }
+    @RequestMapping("/getdectlr")
+    public String getdec(@RequestParam Map<String,String> map){
+        String r=visitsetService.getdecset(map);
+        return r;
+    }
 }
