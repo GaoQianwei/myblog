@@ -13,15 +13,15 @@
 <!--title icon setting-->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <!--link_set-->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
-<link rel="stylesheet" type="text/css" href="css/style.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
 </head>
 
 
 
 <body>
-<header class="lyear-header text-center" style="background-image:url(images/left-bg.jpg);">
+<header  class="lyear-header text-center" style="background-image: url(../images/left-bg.jpg); height: 100%;">
   <div class="lyear-header-container">
     <div class="lyear-mask"></div>
     <h1 class="lyear-blogger pt-lg-4 mb-0"><a href="index.html">笔下光年的博客</a></h1>
@@ -34,7 +34,7 @@
     
     <div id="navigation" class="collapse navbar-collapse flex-column">
 	  <div class="profile-section pt-3 pt-lg-0">
-	    <img class="profile-image mb-3 rounded-circle mx-auto" src="images/lyear.png" width="120" height="120" alt="笔下光年" >
+	    <img class="profile-image mb-3 rounded-circle mx-auto" src="../images/lyear.png" width="120" height="120" alt="笔下光年" >
 	    <div class="lyear-sentence mb-3">必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。</div>
         <hr>
 	  </div>
@@ -63,7 +63,8 @@
   </nav>
   </div>
 </header>
-<div class="lyear-wrapper">
+<div class="lyear-wrapper" style=" background-attachment: fixed;background-position:right top;background-size: 77% 100%;
+">
   <section class="mt-5 pb-5">
     <div class="container">
 
@@ -75,21 +76,21 @@
             <div class="arc-header">
               <h3 class="arc-title">装扮设置</h3>
 				<div>————————————————————————————</div>
-				<h5> <a href="" >风格1</a></h5>
+				<h5> <a href="#" class="typeset">type1</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="images/blog/post-1.png" alt="" class="img-fluid rounded"></a>
+				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
-				<h5> <a href="" >风格2</a></h5>
+				<h5> <a href="#" class="typeset">type2</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="images/blog/post-1.png" alt="" class="img-fluid rounded"></a>
+				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
-				<h5> <a href="" >风格3</a></h5>
+				<h5> <a href="#" class="typeset">type3</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="images/blog/post-1.png" alt="" class="img-fluid rounded"></a>
+				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
-				<h5> <a href="" >风格4</a></h5>
+				<h5> <a href="#" class="typeset">type4</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="images/blog/post-1.png" alt="" class="img-fluid rounded"></a>
+				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
 				
             </div>
@@ -112,16 +113,16 @@
           
             <!-- 热门文章 -->
             <aside class="widget ">
-              <div class="widget-title"><a href="">好友推荐</a></div>
+              <div class="widget-title"><a href="recommend.html">好友推荐</a></div>
             </aside>
 
             <!-- 归档 -->
             <aside class="widget">
-              <div class="widget-title"><a href="">访问管理</a></div>
+              <div class="widget-title"><a href="visitset.html">访问管理</a></div>
               
             </aside>
 			<aside class="widget">
-              <div class="widget-title"><a href="">装扮设置</a></div>
+              <div class="widget-title"><a href="decorate.html">装扮设置</a></div>
               
             </aside>
             <!-- 标签 -->
@@ -135,9 +136,39 @@
     <!-- end container -->
   </section>
 </div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.min.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/main.min.js"></script>
+<script>
+    $(function(){
+
+        $.post("/getdectlr",{"no":1231231},function (rst) {
+            var currentImage="";
+            if(rst=="type1") currentImage="../images/blog/post-1.png";
+            if(rst=="type2") currentImage="../images/blog/post-2.png";
+            if(rst=="type3") currentImage="../images/blog/post-1.png";
+            if(rst=="type4") currentImage="../images/blog/timg.png";
+            $("div.lyear-wrapper").css("background-image","url("+currentImage+")");
+        });
+
+        $("a.typeset").click(function(){
+            var currentImage="images/blog/post-1.png";
+            var typemsg=$(this).text();
+            if(typemsg=="type1") currentImage="../images/blog/wall_1.png";
+            if(typemsg=="type2") currentImage="../images/blog/post-2.png";
+            if(typemsg=="type3") currentImage="../images/blog/post-1.png";
+            if(typemsg=="type4") currentImage="../images/blog/timg.png";
+            $.post("/dectlr",{"dectype":typemsg,"no":1231231},function (rst) {
+                    alert(rst);
+            });
+            $("div.lyear-wrapper").css("background-image","url("+currentImage+")");
+
+        });
+
+
+    });
+</script>
 </body>
+
 </html>

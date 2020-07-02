@@ -5,21 +5,21 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>个人空间</title>
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/default.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
-	<link href="css/coming-soon.min.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
+	<link rel="stylesheet" type="text/css" href="../css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+	<link href="../css/coming-soon.min.css" rel="stylesheet">
 
 </head>
 <body>
 
   <div class="overlay"></div>
   <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-    <source src="mp4/ove.mp4" type="video/mp4">
+    <source src="../mp4/ove.mp4" type="video/mp4">
   </video>
 
   <div class="masthead">
@@ -37,48 +37,48 @@
 							<div class="login-form">
 								<div class="sign-in-htm">
 									<div class="group">
-										<label for="user" class="label">Username</label>
-										<input id="user" type="text" class="input">
+										<label for="user_in" class="label">Username</label>
+										<input id="user_in" type="text" class="input">
 									</div>
 									<div class="group">
-										<label for="pass" class="label">Password</label>
-										<input id="pass" type="password" class="input" data-type="password">
+										<label for="pass_in" class="label">Password</label>
+										<input id="pass_in" type="password" class="input" data-type="password">
 									</div>
 									<div class="group">
 										<input id="check" type="checkbox" class="check" checked>
 										<label for="check"><span class="icon"></span> Keep me Signed in</label>
 									</div>
 									<div class="group">
-										<input type="submit" class="button" value="Sign In">
+										<input id="signin" type="submit" class="button" value="Sign In">
 									</div>
 									<div class="hr"></div>
 									<div class="foot-lnk">
-										<a href="#forgot">Forgot Password?</a>
+										<a href="/pages/pwdReset.html">Forgot Password?</a>
 									</div>
 								</div>
 								<div class="sign-up-htm">
 									<div class="group">
-										<label for="user" class="label">Username</label>
-										<input id="user" type="text" class="input">
+										<label for="user_up" class="label">Username</label>
+										<input id="user_up" type="text" class="input">
 									</div>
 									<div class="group">
-										<label for="pass" class="label">Password</label>
-										<input id="pass" type="password" class="input" data-type="password">
+										<label for="pass_up" class="label">Password</label>
+										<input id="pass_up" type="password" class="input" data-type="password">
 									</div>
 									<div class="group">
-										<label for="pass" class="label">Repeat Password</label>
-										<input id="pass" type="password" class="input" data-type="password">
+										<label for="pass_a" class="label">Repeat Password</label>
+										<input id="pass_a" type="password" class="input" data-type="password">
 									</div>
 									<div class="group">
-										<label for="pass" class="label">Email Address</label>
-										<input id="pass" type="text" class="input">
+										<label for="pass_e" class="label">Email Address</label>
+										<input id="pass_e" type="text" class="input">
 									</div>
 									<div class="group">
-										<input type="submit" class="button" value="Sign Up">
+										<input id="signup" type="submit" class="button" value="Sign Up">
 									</div>
 									<div class="hr"></div>
 									<div class="foot-lnk">
-										<label for="tab-1">Already Member?</a>
+										<label for="tab-1">Already Member?</label>
 									</div>
 								</div>
 							</div>
@@ -90,15 +90,62 @@
         </div>
       </div>
     </div>
-  </div>
   
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/coming-soon.min.js"></script>
-
 </body>
+<script src="/js/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery("#signin").click(function () {
+			let name = jQuery("#user_in").val();
+			let pwd=jQuery("#pass_in").val();
+			jQuery.post("/signin",{"name":name,"pwd":pwd},function(rst) {
+				//alert("name:"+name + "\npwd:" +pwd);
+				/** 将验证阶段交给控制层
+				let flag = 0;
+				rst.forEach(function (map) {
+					if(map.name==name && map.code==pwd)
+					flag = 1;
+				})
+				let msg = "登录失败"
+				if(flag==1)
+					msg = "登录成功"
+				alert(msg);
+				 **/
+				let msg = "登入失败"
+				if(rst.flag == "true"){
+					msg = "登录成功";
+				}
+				alert(msg);
+				jQuery.cookie("usr_no", rst.no, {path:'/'});
+			});
+		})
+	});
+
+	$(document).ready(function () {
+		$("#signup").click(function () {
+			let js = signup();
+			if (js != null)
+				jQuery.post("/signup", js, function (rst) {
+					if (rst == true)
+						alert("注册成功")
+					else
+						alert("注册失败")
+			})
+		})
+	})
+
+	function signup() {
+		let name = jQuery("#user_up").val();
+		let pwd = jQuery("#pass_up").val();
+		let pwd_a = jQuery("#pass_a").val();
+		let email = jQuery("#pass_e").val();
+		if(pwd != pwd_a)
+			alert("重复密码错误！")
+		else
+			var js = {"name":name, "pwd":pwd, "email":email}
+		return js
+	}
+</script>
 </html>
