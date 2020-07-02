@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 public interface RecommendMapper {
 
-    @Select("select id,dectype,prmsset from visitset")
+    @Select("select sex,email,description from per_infomation")
     public List<Map<String,Object>> GetRec();
 
 }
