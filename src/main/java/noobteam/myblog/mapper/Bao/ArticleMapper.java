@@ -10,11 +10,11 @@ public interface ArticleMapper {
     @Select("select * from article")
     public List<Map<String,Object>> findAll();
 
-    @Select("select * from article where id=#{n}")
-    public Map<String,Object> findById(int id);
+    @Select("select * from article where target=#{n}")
+    public List<Map<String,Object>> findByTar(String tar);
 
-    @Insert("insert into article(target,link,date)" +
-            "value(#{art.target},#{art.link},#{art.date})")
+    @Insert("insert into article(tittle,summary,details,target,date)" +
+            "value(#{art.tittle},#{art.summary},#{art.details},#{art.target},#{art.date})")
     public int save(@Param("art") Map<String,String> map);
 
     @Update("update article " +

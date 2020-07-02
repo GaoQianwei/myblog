@@ -7,6 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
@@ -29,4 +30,13 @@ public class ArticleServiceTest {
         assertTrue(flag);
     }
 
+    @org.junit.Test
+    public void findByTar() {
+        Map<String,String> map=new HashMap<>();
+        map.put("target","1111111111");
+        map.put("link","admk");
+        map.put("date","2020-6-16");
+        List<Map<String,Object>> list=articleService.findByTar(map);
+        System.out.println(list);
+    }
 }

@@ -16,25 +16,24 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript">
 
-        jQuery(function(){
+        function rows(np){
             var target="1111111111";
             jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
                 var pageCount = rst.length%5 == 0 ? rst.length/5 : (rst.length/5+1);
                 var codePage = "";
-                alert(pageCount);
-                for (var j=-1; j<=3; j++) {
+                for (var j=np-2; j<=np+2; j++) {
                     if(j > pageCount && j > 5){
                         codePage +=
                             "<li><a id='"+(j-5)+"' onclick='pages("+(j-5)+");rows("+(j-5)+");'>"+(j-5)+"</a></li>";
                     }
                 }
-                for (var j=-1; j<=3; j++) {
+                for (var j=np-2; j<=np+2; j++) {
                     if(j >= 1 && j <= pageCount) {
                         codePage +=
                             "<li><a id='"+j+"' onclick='pages("+j+");rows("+j+");'>"+j+"</a></li>";
                     }
                 }
-                for (var j=-1; j<=3; j++) {
+                for (var j=np-2; j<=np+2; j++) {
                     if(j < 1 && j+5 <= pageCount){
                         codePage +=
                             "<li><a id='"+(j+5)+"' onclick='pages("+(j+5)+");rows("+(j+5)+");'>"+(j+5)+"</a></li>";
@@ -42,6 +41,39 @@
                 }
                 jQuery("#page-size").html(codePage);
             },"json");//表示返回数据的格式
+        }
+
+            function pages(p){
+            var target="1111111111";
+            jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
+                var body="";
+                for (var i=5*(p-1); i<rst.length&&i<5*(p-1)+5; i++) {
+                    var json=rst[i];
+                    body +=
+                        "<div>\r\n" +
+                        "<h2>\r\n" +
+                        "	<a href='#'>"+json.tittle+"</a>\r\n" +
+                        //"	<a href='articleDetail.html?aid="+json.id+"'>"+json.tittle+"</a>\r\n" +
+                        "</h2>\r\n" +
+                        "<ul class=\"arc-meta\">\r\n" +
+                        "	<li><i class=\"mdi mdi-calendar\"></i>"+json.date+"</li>\r\n" +
+                        "	<li><i class=\"mdi mdi-tag-text-outline\"></i> <a href=\"#\">"+json.target+"</a></li>\r\n" +
+                        "</ul>\r\n" +
+                        "<p>"+json.summary+"</p>\r\n" +
+                        "<a href='articleDetail.html?aid="+json.id+"'>\r\n" +
+                        "	<strong>More</strong>\r\n" +
+                        "	<span class=\"glyphicon glyphicon-menu-right\" aria-hidden=\"true\"></span>\r\n" +
+                        "</a>\r\n" +
+                        "<hr />\r\n" +
+                        "</div>";
+                }
+                jQuery("#tbody").html(body);
+            },"json");//表示返回数据的格式
+        }
+
+        $(document).ready(function () {
+            pages(1);
+            rows(1);
         });
     </script>
 </head>

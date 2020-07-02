@@ -30,13 +30,24 @@ public class ArticleControlTest {
     private MockMvc mockMvc;
     @org.junit.Test
     public void findAll() {
+
+    }
+
+    @org.junit.Test
+    public void findByTar() throws Exception {
+        MockHttpServletRequestBuilder builder=
+                MockMvcRequestBuilders.post("/art_usr")
+                        .param("target","笔下光年");
+        MvcResult rst=mockMvc.perform(builder).andReturn();
+        String str=rst.getResponse().getContentAsString(Charset.forName("UTF-8"));
+        System.out.println(str);
     }
 
     @org.junit.Test
     public void save() throws Exception {
         MockHttpServletRequestBuilder builder=
                 MockMvcRequestBuilders.post("/art_save")
-                        .param("target","1111100000")
+                        .param("target","1111111111")
                         .param("link","sakfj")
                         .param("date","2020-06-20");
         MvcResult rst=mockMvc.perform(builder).andReturn();
