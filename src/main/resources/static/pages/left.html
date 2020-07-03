@@ -17,7 +17,7 @@
 <header  class="lyear-header text-center" style="background-image: url(../images/left-bg.jpg); height: 100%;">
 	<div class="lyear-header-container">
 		<div  class="lyear-mask"></div>
-		<h1 class="lyear-blogger pt-lg-4 mb-0"><a href="index.html">&emsp;笔下光年的博客</a></h1>
+		<h1 class="lyear-blogger pt-lg-4 mb-0"><a href="index.html" id="name"></a></h1>
 		<nav class="navbar navbar-expand-lg">
 			<a class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
 				<div>
@@ -51,7 +51,7 @@
 						<a class="nav-link" href="personalMessage.html" target="center">个人档案</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="center.html" target="center">个人中心</a>
+						<a class="nav-link" href="decorate.html" target="center">个人中心</a>
 					</li>
 				</ul>
 			</div>
@@ -62,5 +62,15 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script type="text/javascript">
+
+	var name=jQuery.cookie("usr_name");
+	var code =name;
+	code+="的博客"
+	jQuery("#name").html(code);
+
+</script>
 </body>
 </html>
