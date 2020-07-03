@@ -25,6 +25,18 @@ public class perInformationService {
         }
         return flag;
     }
+    public boolean doUpdateH(Map<String,String> tea){
+        boolean flag=false;
+        try {
+            double r=perInfomationMapper.updateH(tea);
+            if(r>0){
+                flag=true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 
     public List<Map<String,Object>> findAll(){
         List<Map<String,Object>> list=null;

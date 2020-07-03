@@ -32,10 +32,10 @@ public class MessageBoardController {
      */
     @RequestMapping("/saveMB")
     public String save(@RequestParam Map<String,String> map){
-        String msg="注册失败";
+        String msg="留言失败";
         boolean flag=messageBoardService.doSave(map);
         if(flag){
-            msg="注册成功";
+            msg="留言成功";
         }
         return msg;
     }

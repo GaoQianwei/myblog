@@ -13,6 +13,9 @@ public interface ArticleMapper {
     @Select("select * from article where target=#{n}")
     public List<Map<String,Object>> findByTar(String tar);
 
+    @Select("select * from article where id=#{n}")
+    public Map<String,Object> findById(int id);
+
     @Insert("insert into article(tittle,summary,details,target,date)" +
             "value(#{art.tittle},#{art.summary},#{art.details},#{art.target},#{art.date})")
     public int save(@Param("art") Map<String,String> map);

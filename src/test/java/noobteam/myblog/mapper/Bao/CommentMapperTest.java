@@ -34,6 +34,13 @@ public class CommentMapperTest {
         System.out.println(map);
     }
 
+    @Test
+    public void findByTar() {
+        String a="8";
+        List<Map<String,Object>> map=commentMapper.findByTar(a);
+        System.out.println(map);
+    }
+
     @org.junit.Test
     public void save() {
         //使用map集合存放数据

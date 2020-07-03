@@ -128,7 +128,13 @@
 				{"data": "name"},
 				{"data": "date"},
 				{"data": "stus"}
-			]
+			],
+			"initComplete":function () {
+				var api = this.api();
+				api.$('td').click(function () {
+					api.search(this.innerHTML).draw();
+				});
+			}
 		});
 	});
 
