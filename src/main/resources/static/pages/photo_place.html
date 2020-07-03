@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>《人物》</title>
+    <title>《建筑古迹》</title>
     <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
     <style type="text/css">
         p{
@@ -24,7 +24,7 @@
    <input type="file" name="inputfile" accept="image/*" width="50px" height="50px" onchange="readFile(this.files[0])"/>
    <div id="preview"></div>>
 -->
-<p>人物照片墙</p>
+<p>建筑古迹照片墙</p>
 <div id="containerT">
     <form class="form-horizontal">
         <div class="form-group form-group-lg text-center">
@@ -52,7 +52,7 @@
     /**
      *
 
-        function readFile(f) {
+     function readFile(f) {
             var reader=new FileReader();
             reader.readAsDataURL(f);
             reader.onload=function () {
@@ -67,8 +67,8 @@
 
         }
 
-    * @param f
-    */
+     * @param f
+     */
 
     jQuery(function () {
 
@@ -96,7 +96,7 @@
                 var path=json.store;
                 var description=json.note;
 
-                if((type=="human")&&(CurrentUserNo==json.host_tar)) {
+                if((type=="place")&&(CurrentUserNo==json.host_tar)) {
 
                     body += '<tr>';
                     body += "<td>" + description + "</td>";
@@ -129,7 +129,7 @@
     function addPhoto() {
         window.location.href="loadPhoto.html";
     }
-    
+
     function  getBack() {
         window.location.href="photoAlbum.html";
     }

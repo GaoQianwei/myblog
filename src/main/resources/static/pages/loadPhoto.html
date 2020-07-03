@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加照片</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
+</head>
+<body>
+<input type="hidden" id="thePhotoPath">
+
+<form>
+
+
+    <div class="form-group">
+    图片：<input type="file" id="file"><br>
+    描述：<input type="text" id="note"><br>
+    </div>
+
+    <div class="form-group">
+        <td>类型:</td>
+        <td>
+            <input type="radio" name="collection" id="human"  value="human" style="padding-left: 50px"/>人物
+            <input type="radio" name="collection" id="animal" value="animal" style="padding-left: 50px"/>动物
+            <input type="radio" name="collection" id="scenery" value="scenery" style="padding-left: 50px"/>风景
+            <input type="radio" name="collection" id="place" value="place" style="padding-left: 50px"/>建筑名胜
+            <input type="radio" name="collection" id="cartoon" value="cartoon" style="padding-left: 50px"/>二次元
+            <input type="radio" name="collection" id="other" value="other" style="padding-left: 50px"/>其它
+
+        </td>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-info" id="btn_up">上传</button>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-info" id="keep">保存</button>
+    </div>
+</form>
+
+</body>
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/jquery/ajaxfileupload.js"></script>
+<script>
+    jQuery(function(){
+        jQuery("#btn_up").click(function(){
+            var f=jQuery("#file")[0].files[0];
+            var n=jQuery("#u_name").val();
+            var formData=new FormData();
+            formData.append("file",f);
+            formData.append("u_name",n);
+            jQuery.ajax({
+                type:"post",
+                url:"/up",
+                data:formData,
+                processData: false,//jquery不处理数据
+                contentType:false,//jquery不需要设置content-type的类型
+                success:function(rst){
+                    alert('上传成功，请点击保存');
+                    jQuery("#thePhotoPath").val(rst);
+
+                },
+                fail:function(rst){
+                    alert("失败");
+                }
+            });
+
+        });
+
+        jQuery("#keep").click(function() {
+
+            var cookies=document.cookie.split(";");
+            for(var i=0;i<cookies.length;i++)
+            {
+                var cookie=cookies[i].trim();
+                if(cookie.indexOf("usr_no")==0)
+                {
+                    var host_tar=cookie.substring("usr_no".length+1);
+                }
+            }
+
+
+            var store=jQuery("#thePhotoPath").val();
+
+            var note=jQuery("#note").val();
+
+            var collection=$("input[type='radio']:checked").val();
+            alert(host_tar);
+            jQuery.post("/savePH",{"collection":collection,"store":store,"note":note,"host_tar":host_tar},function (rst) {
+
+                if(rst=="上传成功")
+                {
+                    window.location.href="photoAlbum.html";
+                }
+            });
+
+        });
+
+
+    });
+
+</script>
+</html>

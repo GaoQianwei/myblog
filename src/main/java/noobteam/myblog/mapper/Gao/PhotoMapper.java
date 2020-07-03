@@ -10,8 +10,8 @@ public interface PhotoMapper {
     @Select("select * from photo")
     public List<Map<String,Object>> findAll();
 
-    @Insert("insert into photo(id,collection,store,note)" +
-            "value(#{mes.id},#{mes.collection},#{mes.store},#{mes.note})")
+    @Insert("insert into photo(id,collection,store,note,host_tar)" +
+            "value(#{mes.id},#{mes.collection},#{mes.store},#{mes.note},#{mes.host_tar})")
     public int save(@Param("mes") Map<String, String> map);
 
     @Update("update photo " +

@@ -5,8 +5,11 @@ import noobteam.myblog.mapper.Gnoch.RecommendMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 @Service
 public class RecommendService {
@@ -30,6 +33,22 @@ public class RecommendService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return r;
+
+    }
+    public int Check(Map<String,String>map){
+        int r=1;
+        List<Map<String,String>> s=null;
+        String t=map.get("friend_no");
+        Map<String,String> u= new HashMap<>() ;
+        u.put("user_no",map.get("user_no"));
+        s=recommendMapper.CheckRep(u);
+        int v=s.size();
+        for (int i=0;i<v;i++){
+            String w = s.get(i).get("friend_no");
+            if (w.equals(t)){r=0;}
+        }
+
         return r;
 
     }

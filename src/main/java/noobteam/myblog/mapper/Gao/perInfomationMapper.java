@@ -19,4 +19,9 @@ public interface perInfomationMapper {
             " set signature=#{t.signature},sex=#{t.sex},birth=#{t.birth},email=#{t.email},description=#{t.description}" +
             " where id=#{t.id}")
     public int update(@Param("t") Map<String,String> tea);
+
+    @Update("update per_infomation " +
+            " set image=#{l.image}" +
+            " where id=#{l.id}")
+    public int updateH(@Param("l") Map<String,String> tea);
 }

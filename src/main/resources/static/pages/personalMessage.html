@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <title>个人信息管理</title>
     <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
-
-
  </head>
 
 <tbody>
 <form action="" method="get">
     <table class="table"  style="border-collapse: separate;border-spacing: 40px 5rem;">
         <input type="hidden" id="current_user_id">
+        <input type="hidden" id="current_image_path">
         <tr>
             <td>头像:</td>
             <td>
-                <input type="file" name="head" id="headImage" style="height: 3.1875rem;width: 449px" />
+            <img id="Image" alt="头像显示失败" title="点击头像可切换头像" onclick="changeImage()"
+                 style="width: 150px;height: 150px;">
             </td>
         </tr>
 
@@ -81,18 +81,41 @@
         jQuery.post("/allPI",function(rst){
 
             /**
-             * CurrentUserId为当前使用者的id号
-             * 先默认为 0
-             * 即当前展示的个人信息为id号为0的用户信息
+             * CurrentUserId为当前使用者的user_no号
+             *
+             * 将从cookie获取的usr_no赋给它
              *
              * @type {number}
              */
-            var CurrentUserId=0;
+            var cookies=document.cookie.split(";");
+            for(var i=0;i<cookies.length;i++)
+            {
+                var cookie=cookies[i].trim();
+                if(cookie.indexOf("usr_no")==0)
+                {
+                    var CurrentUserNo=cookie.substring("usr_no".length+1);
+                }
+            }
+
+            for(var i=0;i<rst.length;i++)
+            {
+                var json=rst[i];
+                if(json.target==CurrentUserNo)
+                {
+                    var CurrentUserId=i;
+                    break;
+                }
+            }
+
+
             var json=rst[CurrentUserId];
 
-            jQuery("#current_user_id").val(CurrentUserId);
+            jQuery("#current_user_id").val(json.id);
             //头像
             //Todo
+            var imagePath=json.image;
+            $("#Image").attr('src',imagePath);
+            jQuery("#current_image_path").val(imagePath);
 
             //签名
             document.getElementById("signature_info").innerHTML=json.signature;
@@ -122,7 +145,7 @@
 
     function saveEdition() {
 
-        var id=jQuery("#current_user_id").val()+1;
+        var id=jQuery("#current_user_id").val();
 
         var signature=jQuery("#signature_info").val();
 
@@ -142,6 +165,50 @@
             }
         })
 
+    }
+
+    function changeImage() {
+
+        window.location.href="headImage.html";
+
+        /**下面为随机切换头像，已经不采用此法
+
+        var path=jQuery("#current_image_path").val();
+
+        var id=jQuery("#current_user_id").val();
+
+        var signature=jQuery("#signature_info").val();
+
+        var sex=$("input[type='radio']:checked").val();
+
+        var birth=jQuery("#birth").val();
+
+        var email=jQuery("#email").val();//
+
+        var description=jQuery("#description_info").val();
+
+        var img=["/images/animal.jpg","/images/example.jpg","/images/human.jpg","/images/place.jpg","/images/other.jpg"];
+
+        var x=4;
+        var y=0;
+
+        for(var i=0;i<img.length;)
+        {
+            i=parseInt(Math.random()*(x-y+1)+y);
+            if(path!=img[i])
+            {
+                path=img[i];
+                break;
+            }
+        }
+        jQuery.post("/editPI",{"id":id,"signature":signature,"sex":sex,"birth":birth,"email":email,"description":description},function (rst) {
+            alert(rst);
+            if(rst=="修改成功")
+            {
+                location.reload();
+            }
+        })
+         */
     }
 
 </script>
