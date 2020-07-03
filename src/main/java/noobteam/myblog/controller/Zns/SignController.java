@@ -1,6 +1,7 @@
 package noobteam.myblog.controller.Zns;
 
 import noobteam.myblog.MathUtils;
+import noobteam.myblog.service.Zns.CheckService;
 import noobteam.myblog.service.Zns.SignService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,8 @@ import java.util.Date;
 public class SignController {
     @Resource
     private SignService signService;
+    @Resource
+    private CheckService checkService;
 
     @RequestMapping("/signin")
     /**
@@ -47,6 +50,20 @@ public class SignController {
         return updatejs;
     }
 
+    public boolean neCheck(List<Map<String,Object>> list, Map<String,String> js){
+        boolean flag = true;
+        try {
+            for(Map<String,Object> map : list){
+                if(map.get("name").equals(js.get("name")) || map.get("email").equals(js.get("email"))){
+                    flag = false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     public Map<String,String> updateDate(String no){
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-MM-dd");
@@ -68,9 +85,15 @@ public class SignController {
 
     @RequestMapping("/signup")
     public boolean insert(@RequestParam Map<String,String> js){
+        //随机生成唯一识别码no
         String no = MathUtils.makeUpNewData(Thread.currentThread().hashCode()+"", 3)+ MathUtils.randomDigitNumber(7);
         js.put("no",no);
-        boolean flag = signService.insert(js);
+        boolean flag = false;
+        List<Map<String,Object>> listcheck = checkService.neGet();
+        if(neCheck(listcheck,js)){
+            System.out.println("该用户名，邮箱可以使用");
+            flag = signService.insert(js);
+        }
         return flag;
     }
 

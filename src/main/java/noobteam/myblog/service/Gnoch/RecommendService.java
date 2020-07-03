@@ -23,5 +23,15 @@ public class RecommendService {
         }
         return list;
     }
+    public int doaddfriend(Map<String,String>map){
+        int r= 0;
+        try {
+            r = recommendMapper.Addfrd(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
+
+    }
 
 }

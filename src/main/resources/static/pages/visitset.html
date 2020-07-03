@@ -63,7 +63,7 @@
   </nav>
   </div>
 </header>
-<div class="lyear-wrapper">
+<div class="lyear-wrapper" >
   <section class="mt-5 pb-5">
     <div class="container">
 
@@ -138,11 +138,14 @@
             if($(this).text()=="仅好友可访问"){
                 msg="frdallowed";
             }
-            $.post("/prmssetctlr",{"prmsset":msg,"no":1231231},function (rst) {
+            $.post("/prmssetctlr",{"prmsset":msg,"target":"21e"},function (rst) {
                 alert(rst);
             });
         });
+
     });
+
+
 </script>
 </body>
 </html>
