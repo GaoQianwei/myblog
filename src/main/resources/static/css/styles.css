@@ -169,3 +169,11 @@ input, button {
 .foot-lnk{
 	text-align:center;
 }
+
+.forget-pwd{
+	color: whitesmoke;
+}
+
+.msgbg{
+	background: #0f6674;
+}
