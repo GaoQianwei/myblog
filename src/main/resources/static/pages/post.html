@@ -2,18 +2,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>笔下光年的博客</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="author" content="yinqi" />
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
-<link rel="stylesheet" type="text/css" href="../js/highlight/styles/agate.css" />
-<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>笔下光年的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="yinqi" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+  <link rel="stylesheet" type="text/css" href="../js/highlight/styles/agate.css" />
+  <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
 </head>
 <body>
 <div>
@@ -27,21 +27,21 @@
             <a style="float: right;font-size: 20px" href="artlist.html"> 返回</a>
           </div>
           <article class="lyear-arc">
-              <div id="tbody">
-              </div>
+            <div id="tbody">
+            </div>
             <div class="arc-header">
-                <h5><span>评论</span></h5>
+              <h5><span>评论</span></h5>
+            </div>
+
+            <ul class="media-list list-unstyled lyear-comment" id="comlist">
+            </ul>
+
+            <div id="respond" class="comment-respond">
+              <div class="mt-2">
+                <h5><span>说点什么吧...</span> <small class="cancel-comment-reply" onclick="cancelReply()">(取消回复)</small></h5>
               </div>
 
-              <ul class="media-list list-unstyled lyear-comment" id="comlist">
-              </ul>
-              
-              <div id="respond" class="comment-respond">
-                <div class="mt-2">
-                  <h5><span>说点什么吧...</span> <small class="cancel-comment-reply" onclick="cancelReply()">(取消回复)</small></h5>
-                </div>
-                
-                <form action="#" method="post" class="mt-4 lyear-comment-form">
+              <form action="#" method="post" class="mt-4 lyear-comment-form">
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
@@ -54,24 +54,24 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       <button type="button" id="btn_com" class="btn btn-primary">发表评论</button>
-                        <button type="button" id="com_reset" class="btn btn-primary">重置</button>
+                      <button type="button" id="com_reset" class="btn btn-primary">重置</button>
                       <input type='hidden' name='comment_arc_id' value='1' id='comment_arc_id' />
                       <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
                     </div>
                   </div>
                 </div>
               </form>
-              </div>
-
             </div>
 
-          </article>
         </div>
-      </div>
 
+        </article>
+      </div>
     </div>
-    <!-- end container -->
-  </section>
+
+</div>
+<!-- end container -->
+</section>
 </div>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -82,112 +82,110 @@
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
 
-    jQuery(function(){
-        //var art_target="8";
-        var art_target=$.getUrlParam('aid');
-        jQuery.post("/com_art_usr",{"art_target":art_target},function (rst){//处理响应的结果
-            var body="";
-            for (var i=0; i<rst.length; i++) {
-                var json=rst[i];
-                body +=
-                    "<li id='comment-"+i+"'>\r\n" +
-                    "<div class=\"media\">\r\n" +
-                    "	<img class=\"d-flex mr-3 rounded-circle\" src=\"../images/author.jpg\" alt='1'>\r\n" +
-                    "<div class=\"media-body\">\r\n" +
-                    "<a href=\"#!\" class=\"text-custom reply-btn\" data-id=\"1\"><i class=\"mdi mdi-reply\"></i>&nbsp; 回复</a>\r\n" +
-                    "	<h4 class=\"media-heading\"><a href=\"#!\">"+json.name+"</a></h4>\r\n" +
-                    "	 <p class=\"text-muted post-date\">"+json.date+"</p>\r\n" +
-                    "<p>"+json.text+"</p>" +
-                    "</div>\r\n" +
-                    "</div>\r\n" +
-                    "</li>";
-            }
-            jQuery("#comlist").html(body);
-        },"json");//表示返回数据的格式
+  jQuery(function(){
+    //var art_target="8";
+    var art_target=$.getUrlParam('aid');
+    jQuery.post("/com_art_usr",{"art_target":art_target},function (rst){//处理响应的结果
+      var body="";
+      for (var i=0; i<rst.length; i++) {
+        var json=rst[i];
+        body +=
+                "<li id='comment-"+i+"'>\r\n" +
+                "<div class=\"media\">\r\n" +
+                "	<img class=\"d-flex mr-3 rounded-circle\" src=\"../images/author.jpg\" alt='1'>\r\n" +
+                "<div class=\"media-body\">\r\n" +
+                "<a href=\"#!\" class=\"text-custom reply-btn\" data-id=\"1\"><i class=\"mdi mdi-reply\"></i>&nbsp; 回复</a>\r\n" +
+                "	<h4 class=\"media-heading\"><a href=\"#!\">"+json.name+"</a></h4>\r\n" +
+                "	 <p class=\"text-muted post-date\">"+json.date+"</p>\r\n" +
+                "<p>"+json.text+"</p>" +
+                "</div>\r\n" +
+                "</div>\r\n" +
+                "</li>";
+      }
+      jQuery("#comlist").html(body);
+    },"json");//表示返回数据的格式
+  });
+
+  $(document).ready(function(e){
+    $("#com_reset").click(function(){
+      $("#comment").val('');
     });
+  });
 
-    $(document).ready(function(e){
-        $("#com_reset").click(function(){
-            $("#comment").val('');
-        });
-    });
-
-    jQuery(function(){
-        jQuery("#btn_com").click(function(){
-            var now = new Date();
-            var year=now.getFullYear();
-            var month=now.getMonth()+1;
-            var date=now.getDate();
-            var hour=now.getHours();
-            var minute=now.getMinutes();
-            if (month<10)
-                month="0"+month;
-            if (date<10)
-                date="0"+date;
-            if (hour<10)
-                hour="0"+hour;
-            if (minute<10)
-                minute="0"+minute;
-            var time=year+"-"+month+"-"+date+" "+hour+":"+minute;
-            //var art_target="8";
-            var art_target=$.getUrlParam('aid');
-            //var usr_target="8622584363";
-          alert(1);
-            var usr_target=jQuery.cookie("usr_no");
-            alert(usr_target);
-            var comment=jQuery("#comment").val();
-            jQuery.post("/com_save",{"date":time,"text":comment,"usr_target":usr_target,"art_target":art_target},function(rst){
-                alert(rst);
-                if(rst=='发表成功')
-                {
-                    location.reload();
-                }
-            });
-
-        });
-    });
-
-    /*获取到Url里面的参数*/
-    (function ($) {
-        $.getUrlParam = function (name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]);
-            return null;
+  jQuery(function(){
+    jQuery("#btn_com").click(function(){
+      var now = new Date();
+      var year=now.getFullYear();
+      var month=now.getMonth()+1;
+      var date=now.getDate();
+      var hour=now.getHours();
+      var minute=now.getMinutes();
+      if (month<10)
+        month="0"+month;
+      if (date<10)
+        date="0"+date;
+      if (hour<10)
+        hour="0"+hour;
+      if (minute<10)
+        minute="0"+minute;
+      var time=year+"-"+month+"-"+date+" "+hour+":"+minute;
+      //var art_target="8";
+      var art_target=$.getUrlParam('aid');
+      //var usr_target="8622584363";
+      var usr_target=jQuery.cookie("usr_no");
+      var comment=jQuery("#comment").val();
+      jQuery.post("/com_save",{"date":time,"text":comment,"usr_target":usr_target,"art_target":art_target},function(rst){
+        alert(rst);
+        if(rst=='发表成功')
+        {
+          location.reload();
         }
-    })(jQuery);
+      });
 
-    $(document).ready(function () {
-        jQuery(function(){
-            jQuery.post("/art_detail",{"id":$.getUrlParam('aid')},function(rst){
-                var json=rst;
-                var code =
-                    "<div>\r\n" +
-                    "<h2>\r\n" +
-                    "	<a href=\"#\" id=\"title\">"+json.tittle+"</a>\r\n" +
-                    "</h2>\r\n" +
-                    "<h5>\r\n" +
-                    "<ul class=\"arc-meta\">\r\n" +
-                    "	<li><i class=\"mdi mdi-calendar\"></i>"+json.date+"</li>\r\n" +
-                    "	<li><i class=\"mdi mdi-tag-text-outline\"></i> <a href=\"#\">"+json.target+"</a></li>\r\n" +
-                    "</ul>\r\n" +
-                    //"   <span class=\"glyphicon glyphicon-calendar\" aria-hidden=\"true\">"+json.date+"</span>\r\n" +
-                    "</h5>\r\n" +
-                    "<h4>\r\n" +
-                    "	<a href=\"#\" id=\"title\">概要：</a>\r\n" +
-                    "</h4>\r\n" +
-                    "<div id=\"summary\">"+json.summary+"</div>\r\n" +
-                    "<h4>\r\n" +
-                    "	<a href=\"#\" id=\"title\">正文：</a>\r\n" +
-                    "</h4>\r\n" +
-                    "<p id=\"detail\">"+json.details+"</p>\r\n" +
-                    "\r\n" +
-                    "<hr />\r\n" +
-                    "</div>";
-                jQuery("#tbody").html(code);
-            },"json");//表示返回数据的格式
-        });
     });
+  });
+
+  /*获取到Url里面的参数*/
+  (function ($) {
+    $.getUrlParam = function (name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    }
+  })(jQuery);
+
+  $(document).ready(function () {
+    jQuery(function(){
+      jQuery.post("/art_detail",{"id":$.getUrlParam('aid')},function(rst){
+        var json=rst;
+        var code =
+                "<div>\r\n" +
+                "<h2>\r\n" +
+                "	<a href=\"#\" id=\"title\">"+json.tittle+"</a>\r\n" +
+                "</h2>\r\n" +
+                "<h5>\r\n" +
+                "<ul class=\"arc-meta\">\r\n" +
+                "	<li><i class=\"mdi mdi-calendar\"></i>"+json.date+"</li>\r\n" +
+                "	<li><i class=\"mdi mdi-tag-text-outline\"></i> <a href=\"#\">"+json.target+"</a></li>\r\n" +
+                "</ul>\r\n" +
+                //"   <span class=\"glyphicon glyphicon-calendar\" aria-hidden=\"true\">"+json.date+"</span>\r\n" +
+                "</h5>\r\n" +
+                "<h4>\r\n" +
+                "	<a href=\"#\" id=\"title\">概要：</a>\r\n" +
+                "</h4>\r\n" +
+                "<div id=\"summary\">"+json.summary+"</div>\r\n" +
+                "<h4>\r\n" +
+                "	<a href=\"#\" id=\"title\">正文：</a>\r\n" +
+                "</h4>\r\n" +
+                "<p id=\"detail\">"+json.details+"</p>\r\n" +
+                "\r\n" +
+                "<hr />\r\n" +
+                "</div>";
+        jQuery("#tbody").html(code);
+      },"json");//表示返回数据的格式
+    });
+  });
 
 </script>
 </body>
