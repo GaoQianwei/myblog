@@ -214,7 +214,7 @@ i[class*='mdi'] {
 /* 搜索框 */
 .search-box{
     position: absolute;
-    top:30px;
+    top:120px;
     left:80%;
     transform: translate(-50%,-50%);
     background: #2f3640;
@@ -224,7 +224,7 @@ i[class*='mdi'] {
 }
 .search-box:hover>.search-txt{
     width: 240px;
-    padding: 0 6px;
+    padding: 0px;
 }
 .search-box:hover>.search-btn{
     background: white;

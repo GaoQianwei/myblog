@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>添加</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+    <script src="../js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script type="text/javascript">
+
+        function rows(np){
+            //var target="1111111111";
+            var target=jQuery.cookie("usr_no");
+            jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
+                var pageCount = rst.length%5 == 0 ? rst.length/5 : (rst.length/5+1);
+                pageCount=Math.floor(pageCount);
+                var codePage = "";
+                codePage +=
+                    "<li><a id='"+0+"' onclick='pages("+1+");rows("+1+");'>首页</a></li>";
+                for (var j=np-2; j<=np+2; j++) {
+                    if(j > pageCount && j > 5){
+                        codePage +=
+                            "<li><a id='"+(j-5)+"' onclick='pages("+(j-5)+");rows("+(j-5)+");'>"+(j-5)+"</a></li>";
+                    }
+                }
+                for (var j=np-2; j<=np+2; j++) {
+                    if(j >= 1 && j <= pageCount) {
+                        codePage +=
+                            "<li><a id='"+j+"' onclick='pages("+j+");rows("+j+");'>"+j+"</a></li>";
+                    }
+                }
+                for (var j=np-2; j<=np+2; j++) {
+                    if(j < 1 && j+5 <= pageCount){
+                        codePage +=
+                            "<li><a id='"+(j+5)+"' onclick='pages("+(j+5)+");rows("+(j+5)+");'>"+(j+5)+"</a></li>";
+                    }
+                }
+                codePage +=
+                    "<li><a id='"+pageCount+"' onclick='pages("+pageCount+");rows("+pageCount+");'>尾页</a></li>";
+                jQuery("#page-size").html(codePage);
+            },"json");//表示返回数据的格式
+        }
+
+            function pages(p){
+            //var target="1111111111";
+                var target=jQuery.cookie("usr_no");
+            alert(target);
+            jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
+                var body="";
+                for (var i=5*(p-1); i<rst.length&&i<5*(p-1)+5; i++) {
+                    var json=rst[i];
+                    body +=
+                        "<div>\r\n" +
+                        "<h2>\r\n" +
+                        "	<a href='post.html?aid="+json.id+"'>"+json.tittle+"</a>\r\n" +
+                        "</h2>\r\n" +
+                        "<ul class=\"arc-meta\">\r\n" +
+                        "	<li><i class=\"mdi mdi-calendar\"></i>"+json.date+"</li>\r\n" +
+                        "	<li><i class=\"mdi mdi-tag-text-outline\"></i> <a href=\"#\">"+json.target+"</a></li>\r\n" +
+                        "</ul>\r\n" +
+                        "<p>"+json.summary+"</p>\r\n" +
+                        "<a href='post.html?aid="+json.id+"'>\r\n" +
+                        "	<strong>More</strong>\r\n" +
+                        "	<span class=\"glyphicon glyphicon-menu-right\" aria-hidden=\"true\"></span>\r\n" +
+                        "</a>\r\n" +
+                        "<hr />\r\n" +
+                        "</div>";
+                }
+                jQuery("#tbody").html(body);
+            },"json");//表示返回数据的格式
+        }
+
+        $(document).ready(function () {
+            pages(1);
+            rows(1);
+        });
+    </script>
+</head>
+<body>
+<div class="search-box">
+    <input type="text" autocomplete="off" id="search" name="search" class="search-txt" placeholder="搜索关键词" />
+    <a class="search-btn" href="#">
+        <i class="fas fa-search"></i>
+    </a>
+</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
+            <div class="widget-title" style="font-size: 30px">日志列表
+                <a style="float: right;font-size: 30px" href="artadd.html"> 写日志</a>
+            </div>
+            <form class="form-horizontal">
+                <div id="tbody">
+                </div>
+            </form>
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination pagination-lg" id="page-size">
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

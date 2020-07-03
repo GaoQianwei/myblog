@@ -23,7 +23,6 @@
   </video>
 
   <div class="masthead">
-    
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-12 my-auto">
@@ -63,7 +62,7 @@
 									</div>
 									<div class="group">
 										<label for="pass_up" class="label">Password</label>
-										<input id="pass_up" type="password" class="input" data-type="password">
+										<input id="pass_up" minlength="6" required type="password" class="input" data-type="password">
 									</div>
 									<div class="group">
 										<label for="pass_a" class="label">Repeat Password</label>
@@ -117,8 +116,9 @@
 				if(rst.flag == "true"){
 					msg = "登录成功";
 				}
-				alert(msg);
 				jQuery.cookie("usr_no", rst.no, {path:'/'});
+				alert(msg);
+				window.location.replace("main.html");
 			});
 		})
 	});
@@ -126,13 +126,24 @@
 	$(document).ready(function () {
 		$("#signup").click(function () {
 			let js = signup();
-			if (js != null)
+			let judge_one = check(js);
+			let judge_three = false;
+			if(js !== "重复密码错误！"){
+				judge_three = true;
+			}
+			jQuery.post("/sign_neCheck", js, function (rst) {
+				if ("ok" !== rst) {
+					alert(rst);
+				}
+			})
+			if (judge_three && judge_one) {
 				jQuery.post("/signup", js, function (rst) {
-					if (rst == true)
+					if (rst === true)
 						alert("注册成功")
 					else
 						alert("注册失败")
-			})
+				})
+			}
 		})
 	})
 
@@ -141,11 +152,26 @@
 		let pwd = jQuery("#pass_up").val();
 		let pwd_a = jQuery("#pass_a").val();
 		let email = jQuery("#pass_e").val();
-		if(pwd != pwd_a)
+		if (pwd === pwd_a) {
+			return {"name": name, "pwd": pwd, "email": email}
+		} else {
 			alert("重复密码错误！")
-		else
-			var js = {"name":name, "pwd":pwd, "email":email}
-		return js
+		}
+	}
+
+	function check(js) {
+		let strname = js.name.replace(/(^\s*)|(\s*$)/g,'');
+		let stremail = js.email.replace(/(^\s*)|(\s*$)/g,'');
+		let strpwd = js.pwd.replace(/(^\s*)|(\s*$)/g,'');
+		if(strname==='' || strname===undefined){
+			alert("用户名不可为空")
+		}else if(stremail ==='' || stremail===undefined){
+			alert("邮箱不可为空")
+		}else if(strpwd ==='' || strpwd===undefined){
+			alert("密码不可为空")
+		}else {
+			return true
+		}
 	}
 </script>
 </html>

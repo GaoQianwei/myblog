@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,20 @@ public class ArticleControl {
     public List<Map<String,Object>> findAll(){
         List<Map<String,Object>> list=articleService.findAll();
         return list;
+    }
+
+    @RequestMapping("/art_usr")
+
+    public List<Map<String,Object>> findByTar(@RequestParam Map<String,String> map){
+        List<Map<String,Object>> list=articleService.findByTar(map);
+        return list;
+    }
+
+    @RequestMapping("/art_detail")
+
+    public Map<String,Object> findById(@RequestParam Map<String,String> map){
+        Map<String,Object> art=articleService.findById(map);
+        return art;
     }
 
     @RequestMapping("/art_save")
