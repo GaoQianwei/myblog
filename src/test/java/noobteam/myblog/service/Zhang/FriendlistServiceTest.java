@@ -9,4 +9,20 @@ class FriendlistServiceTest {
     @Test
     void doDelete() {
     }
+
+    @Test
+    void name() {
+    }
+
+    @Test
+    void testDoDelete() {
+    }
+
+    @Test
+    void name() {
+    }
+
+    @Test
+    void testDoDelete1() {
+    }
 }

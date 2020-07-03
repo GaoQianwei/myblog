@@ -9,4 +9,12 @@ class FriendlistControllerTest {
     @Test
     void delete() {
     }
+
+    @Test
+    void getname() {
+    }
+
+    @Test
+    void testDelete() {
+    }
 }
