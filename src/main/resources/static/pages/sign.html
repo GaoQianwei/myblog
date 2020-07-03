@@ -116,8 +116,9 @@
 				if(rst.flag == "true"){
 					msg = "登录成功";
 				}
-				alert(msg);
 				jQuery.cookie("usr_no", rst.no, {path:'/'});
+				alert(msg);
+				window.location.replace("main.html");
 			});
 		})
 	});
