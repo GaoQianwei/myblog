@@ -22,10 +22,14 @@
 <p>我的相册</p>
 <table align="center">
     <tr>
-        <td><img src="/images/human.jpg" alt="" title="点击封面进入《人物》相册" onclick="jumpHuman()"
+        <td><img src="/images/human.jpg" alt="图片加载失败" title="点击封面进入《人物》相册" onclick="jumpHuman()"
                  style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
-        <td><img src="/images/animal.jpg" alt="" title="点击封面进入《动物》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
-        <td><img src="/images/scenery.jpg" alt="" title="点击封面进入《自然风景》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+
+        <td><img src="/images/animal.jpg" alt="图片加载失败" title="点击封面进入《动物》相册" onclick="jumpAnimal()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+
+        <td><img src="/images/scenery.jpg" alt="图片加载失败" title="点击封面进入《自然风景》相册" onclick="jumpScenery()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
     </tr>
     <tr align="center" >
         <td name="11" style="margin-left: 50px">人物</td>
@@ -34,9 +38,12 @@
     </tr>
 
     <tr>
-        <td><img src="/images/place.jpg" alt="" title="点击封面进入《建筑古迹》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;;"></td>
-        <td><img src="/images/example.jpg" alt="" title="点击封面进入《二次元》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
-        <td><img src="/images/other.jpg"  alt="" title="点击封面进入《其它》相册" style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+        <td><img src="/images/place.jpg" alt="图片加载失败" title="点击封面进入《建筑古迹》相册" onclick="jumpPlace()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;;"></td>
+        <td><img src="/images/example.jpg" alt="图片加载失败" title="点击封面进入《二次元》相册" onclick="jumpCartoon()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
+        <td><img src="/images/other.jpg"  alt="图片加载失败" title="点击封面进入《其它》相册" onclick="jumpOther()"
+                 style="width: 200px;height: 200px;margin-left: 50px;margin-top: 50px;"></td>
     </tr>
     <tr align="center" >
         <td name="21" style="margin-left: 50px">建筑古迹</td>
@@ -52,10 +59,23 @@
 <script type="text/javascript">
 
     function jumpHuman() {
-
         window.location.href="photo_human.html";
     }
-
+    function jumpAnimal() {
+        window.location.href="photo_animal.html";
+    }
+    function jumpScenery() {
+        window.location.href="photo_scenery.html";
+    }
+    function jumpPlace() {
+        window.location.href="photo_place.html";
+    }
+    function jumpCartoon() {
+        window.location.href="photo_cartoon.html";
+    }
+    function jumpOther() {
+        window.location.href="photo_other.html";
+    }
 
 </script>
 </html>

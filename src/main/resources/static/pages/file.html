@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    头像：<input type="file" id="file"><br>
+    姓名：<input type="text" id="u_name"><br>
+    <button type="button" id="btn_up">上传</button>
+</div>
+</body>
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/jquery/ajaxfileupload.js"></script>
+<script>
+    jQuery(function(){
+        jQuery("#btn_up").click(function(){
+            var f=jQuery("#file")[0].files[0];
+            var n=jQuery("#u_name").val();
+            var formData=new FormData();
+            formData.append("file",f);
+            formData.append("u_name",n);
+            jQuery.ajax({
+                type:"post",
+                url:"/up",
+                data:formData,
+                processData: false,//jquery不处理数据
+                contentType:false,//jquery不需要设置content-type的类型
+                success:function(rst){
+                    alert(rst);
+                },
+                fail:function(rst){
+                    alert(rst);
+                }
+
+            });
+        });
+    });
+</script>
+</html>

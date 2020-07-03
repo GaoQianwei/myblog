@@ -26,6 +26,16 @@ public class perInformationController {
         return msg;
     }
 
+    @RequestMapping("/editPIH")
+    public String updateH(@RequestParam Map<String,String> tea){
+        String msg="修改失败";
+        boolean flag=perInformationService.doUpdateH(tea);
+        if(flag){
+            msg="修改成功";
+        }
+        return msg;
+    }
+
     @RequestMapping("/allPI")
     public List<Map<String,Object>> findAll(){
         List<Map<String,Object>> list=perInformationService.findAll();

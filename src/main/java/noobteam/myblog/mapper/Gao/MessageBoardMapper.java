@@ -12,8 +12,8 @@ public interface MessageBoardMapper {
     @Select("select * from message where id=#{id}")
     public Map<String,Object> findById(int id);
 
-    @Insert("insert into message(text,visit_tar,data)" +
-            "value(#{tea.name},#{tea.sex},#{tea.no})")
+    @Insert("insert into message(text,visit_tar,data,host_tar)" +
+            "value(#{tea.name},#{tea.sex},#{tea.no},#{tea.host_tar})")
     public int save(@Param("tea") Map<String,String> map);
 
 
