@@ -37,7 +37,7 @@
 								<div class="sign-in-htm">
 									<div class="group">
 										<label for="user_in" class="label">Username</label>
-										<input id="user_in" type="text" class="input">
+										<input id="user_in" type="text" class="input" >
 									</div>
 									<div class="group">
 										<label for="pass_in" class="label">Password</label>
@@ -116,9 +116,12 @@
 				if(rst.flag == "true"){
 					msg = "登录成功";
 				}
-				jQuery.cookie("usr_no", rst.no, {path:'/'});
 				alert(msg);
-				window.location.replace("main.html");
+				if(msg === "登录成功"){
+					jQuery.cookie("usr_no", rst.no, {path:'/'});
+					jQuery.cookie("usr_name", rst.name, {path:'/'});
+					window.location.replace("main.html");
+				}
 			});
 		})
 	});
