@@ -138,16 +138,16 @@
 		jQuery.post("/getrec",function(rst){//处理响应的结果
 			var body="";
 
-			for(var i=0;i<rst.length;i++)
+			for(let i=0;i<rst.length;i++)
 			{
-				var json=rst[i];//{"tea_id":1,"tea_name":"zhagnsan","tea_sex":'',"tea_no":""}
+				let json=rst[i];//{"tea_id":1,"tea_name":"zhagnsan","tea_sex":'',"tea_no":""}
 				body+="<tr>";
 				body+="<td>"+json.sex+"</td>";
 				body+="<td>"+json.email+"</td>";
 				body+="<td>"+json.description+"</td>";
 				body+="<td>";
-				body+="<a href='#' onclick='addfrd()'>添加好友</a>&nbsp;&nbsp;";
-				body+="<a href='#' >查看空间</a>";
+				body+="<a href='#'  onclick='addfrd(this.name)' name="+json.target+">添加好友</a>&nbsp;&nbsp;";
+				body+="<a href='#' onclick=''>查看空间</a>";
 				body+="</td>"
 				body+="</tr>";
 			}
@@ -157,11 +157,16 @@
 
 	});
 
-    function addfrd() {
-        $.post("/addfrd",{"user_no":"21e","friend_no":"02315"},function (rst) {
+
+    function addfrd(no) {
+        //可以添加check检测已存在好友
+
+        $.post("/addfrd",{"user_no":"21e","friend_no":no},function (rst) {
             alert(rst);
         });
     }
+
+
 </script>
 </body>
 </html>
