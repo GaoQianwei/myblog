@@ -29,6 +29,13 @@ public class ArticleControl {
         return list;
     }
 
+    @RequestMapping("/art_detail")
+
+    public Map<String,Object> findById(@RequestParam Map<String,String> map){
+        Map<String,Object> art=articleService.findById(map);
+        return art;
+    }
+
     @RequestMapping("/art_save")
 
     public String save(@RequestParam Map<String,String> map){

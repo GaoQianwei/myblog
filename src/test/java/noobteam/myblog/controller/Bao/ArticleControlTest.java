@@ -1,4 +1,4 @@
-package noobteam.myblog.controller;
+package noobteam.myblog.controller.Bao;
 
 
 

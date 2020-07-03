@@ -91,7 +91,8 @@
 			if (date<10)
 				date="0"+date;
 			var time=year+"-"+month+"-"+date;
-			var target="1000000009";
+			//var target="1111111111";
+			var target=jQuery.cookie("usr_no");
 			var tittle=jQuery("#title").val();
 			var summary=jQuery("#summary").val();
 			var details=jQuery("#editor-zh").val();

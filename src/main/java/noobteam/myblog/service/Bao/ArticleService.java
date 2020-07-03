@@ -77,4 +77,15 @@ public class ArticleService {
         }
         return list;
     }
+
+    public Map<String,Object> findById(Map<String,String> map){
+        Map<String,Object> art=null;
+        try {
+            int id=Integer.parseInt(map.get("id"));
+            art=articleMapper.findById(id);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return art;
+    }
 }

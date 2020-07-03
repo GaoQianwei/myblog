@@ -13,6 +13,9 @@ public interface CommentMapper {
     @Select("select * from comment where id=#{n}")
     public Map<String,Object> findById(int id);
 
+    @Select("select * from comment where art_target=#{n}")
+    public List<Map<String,Object>> findByTar(String tar);
+
     @Insert("insert into comment(date,text,usr_target,art_target)" +
             "value(#{com.date},#{com.text},#{com.usr_target},#{com.art_target})")
     public int save(@Param("com") Map<String,String> map);
