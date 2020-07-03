@@ -17,7 +17,11 @@
 <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
 </head>
-
+<style>
+    a{
+        color: azure;
+    }
+</style>
 
 
 <body>
@@ -73,8 +77,8 @@
 
           <article class="lyear-arc">
             <div class="arc-header">
-              <h3 class="arc-title">访问权限管理</h3>
-				<div>——————————————————————————————</div>
+              <h3 class="arc-title" style="color: azure">访问权限管理</h3>
+				<div style="color: azure">——————————————————————————————</div>
 				<h5> <a href="#" class="prmsset">仅好友可访问</a></h5>
 				<h5> <a href="#" class="prmsset">任何人可访问</a></h5>
 				
@@ -133,6 +137,17 @@
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script>
     $(function () {
+        $.post("/getdectlr",{"target":"21e"},function (rst) {
+            var currentImage="";
+            var currentImage2="";
+            if(rst=="type1") {currentImage="../images/blog/11.png";currentImage2="../images/blog/11.jpg";}
+            if(rst=="type2") {currentImage="../images/blog/14.png";currentImage2="../images/blog/13.jpg";}
+            if(rst=="type3") {currentImage="../images/blog/12.png";currentImage2="../images/blog/2_c.jpg";}
+            if(rst=="type4") {currentImage="../images/blog/9.jpg";currentImage2="../images/blog/9.jpg";}
+            $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed","background-position":"right top","background-size":"77% 100%"});
+            $("header.lyear-header").css({"background-image":"url("+currentImage2+")"});
+        });
+
         $("a.prmsset").click(function () {
             var msg="allallowed";
             if($(this).text()=="仅好友可访问"){

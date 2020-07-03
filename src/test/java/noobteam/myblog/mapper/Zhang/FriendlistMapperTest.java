@@ -13,4 +13,16 @@ class FriendlistMapperTest {
     @Test
     void delete() {
     }
+
+    @Test
+    void getFr3Name() {
+    }
+
+    @Test
+    void testDelete() {
+    }
+
+    @Test
+    void name() {
+    }
 }
