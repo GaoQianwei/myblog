@@ -39,9 +39,11 @@ public class SignController {
                 if(map.get("name").equals(js.get("name")) && map.get("code").equals(js.get("pwd"))){
                     updatejs = updateDate(map.get("no").toString());
                     flag = signService.updateUsr_stus(updatejs);
-                    if(flag)
+                    if(flag){
                         updatejs.put("flag", "true");
-                    else updatejs.put("flag", "false");
+                        updatejs.put("name", js.get("name"));
+                    } else updatejs.put("flag", "false");
+                    //updatejs:{flag:boolean, date, no, name}
                 }
             }
         } catch (Exception e) {
@@ -76,6 +78,7 @@ public class SignController {
 
     @RequestMapping("/setCookies_no")
     public String setCookies(HttpServletResponse response, String no){
+
         Cookie cookie = new Cookie("usr_no", no);
         response.addCookie(cookie);
         System.out.println("Cookies添加成功");
