@@ -26,7 +26,7 @@
         containerT中是留言板的输入与留言的部分，
         由于部分id会与container中的id重合，故在其后加了大写字母'T'
     -->
-
+<input type="hidden" id="current_user_id">
 <div id="containerT">
     <form action="/save" method="post" class="form-horizontal">
         <div class="form-group form-group-lg">
@@ -177,7 +177,8 @@
             var name=jQuery("#nameT").val();
             var no=jQuery("#noT").val();
             var sex=jQuery("#sexT").val();
-            jQuery.post("/saveMB",{"name":name,"no":no,"sex":sex},function(rst){
+            var host_tar=jQuery("#current_user_id").val();
+            jQuery.post("/saveMB",{"name":name,"no":no,"sex":sex,"host_tar":host_tar},function(rst){
                 jQuery("#reg_msg").html(rst);
                 jQuery('#myModal').modal("show");
 
@@ -196,23 +197,41 @@
         //页面加载完毕，就去数据库中获取数据
         //          /all 请求的地址
         jQuery.post("/allMB",function(rst){//处理响应的结果
+
+            var cookies=document.cookie.split(";");
+            for(var i=0;i<cookies.length;i++)
+            {
+                var cookie=cookies[i].trim();
+                if(cookie.indexOf("usr_no")==0)
+                {
+                    var CurrentUserNo=cookie.substring("usr_no".length+1);
+                }
+            }
+
+            jQuery("#current_user_id").val(CurrentUserNo);
+
             var body="";
             for(var i=0;i<rst.length;i++)
             {
                 var json=rst[i];//{"id":1,"text":"zhagcwefnsan","visit_tar":'',"data":""}
-                body+="<tr>";
-                body+="<td>"+json.data+"</td>";
-                body+="<td>"+json.text+"</td>";
-                body+="<td>"+json.visit_tar+"</td>";
-                body+="<td>";
-                body+="<a href='#' onclick='showDelModal(\""+json.id+"\",\""+json.text+"\")'>删除</a>&nbsp;&nbsp;";
-                body+="<a href='#' onclick='showEditModal(" +
-                    "\""+json.id+"\"," +
-                    "\""+json.text+"\"," +
-                    "\""+json.data+"\"," +
-                    "\""+json.visit_tar+"\")'>修改</a>";
-                body+="</td>"
-                body+="</tr>";
+
+
+                if(CurrentUserNo==json.host_tar)
+                {
+                    body+="<tr>";
+                    body+="<td>"+json.data+"</td>";
+                    body+="<td>"+json.text+"</td>";
+                    body+="<td>"+json.visit_tar+"</td>";
+                    body+="<td>";
+                    body+="<a href='#' onclick='showDelModal(\""+json.id+"\",\""+json.text+"\")'>删除</a>&nbsp;&nbsp;";
+                    body+="<a href='#' onclick='showEditModal(" +
+                        "\""+json.id+"\"," +
+                        "\""+json.text+"\"," +
+                        "\""+json.data+"\"," +
+                        "\""+json.visit_tar+"\")'>修改</a>";
+                    body+="</td>"
+                    body+="</tr>";
+                }
             }
             jQuery("#tbody").html(body);
         },"json");//表示返回数据的格式

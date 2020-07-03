@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变头像</title>
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"  rel="stylesheet"  type="text/css" >
+</head>
+<body>
+<input type="hidden" id="thePhotoPath">
+<input type="hidden" id="current_user_id">
+
+<tr>
+    图片：<input type="file" id="file" ><br>
+
+<tr>
+    <button type="button" class="btn btn-info" id="btn_up">上传</button>
+</tr>
+
+<tr>
+    <button type="button" class="btn btn-info" id="keep">保存</button>
+</tr>
+
+
+
+
+</body>
+<script src="/jquery/jquery-3.4.1.min.js"></script>
+<script src="/jquery/ajaxfileupload.js"></script>
+<script>
+    jQuery(function(){
+
+        jQuery.post("/allPI",function(rst){
+
+            /**
+             * CurrentUserId为当前使用者的user_no号
+             *
+             * 将从cookie获取的usr_no赋给它
+             *
+             * @type {number}
+             */
+            var cookies=document.cookie.split(";");
+            for(var i=0;i<cookies.length;i++)
+            {
+                var cookie=cookies[i].trim();
+                if(cookie.indexOf("usr_no")==0)
+                {
+                    var CurrentUserNo=cookie.substring("usr_no".length+1);
+                }
+            }
+
+            for(var i=0;i<rst.length;i++)
+            {
+                var json=rst[i];
+                if(json.target==CurrentUserNo)
+                {
+                    var CurrentUserId=i;
+                    break;
+                }
+            }
+
+            var json=rst[CurrentUserId];
+
+            jQuery("#current_user_id").val(json.id);
+
+        },"json");
+
+
+        jQuery("#btn_up").click(function(){
+            var f=jQuery("#file")[0].files[0];
+            var n=jQuery("#u_name").val();
+            var formData=new FormData();
+            formData.append("file",f);
+            formData.append("u_name",n);
+            jQuery.ajax({
+                type:"post",
+                url:"/up",
+                data:formData,
+                processData: false,//jquery不处理数据
+                contentType:false,//jquery不需要设置content-type的类型
+                success:function(rst){
+                    alert('上传成功，请点击保存');
+                    jQuery("#thePhotoPath").val(rst);
+
+                },
+                fail:function(rst){
+                    alert("失败");
+                }
+            });
+
+        });
+
+        jQuery("#keep").click(function() {
+
+            var id=jQuery("#current_user_id").val();
+
+            var store=jQuery("#thePhotoPath").val();
+
+            jQuery.post("/editPIH",{"id":id,"image":store},function (rst) {
+
+                if(rst=="修改成功")
+                {
+                    window.location.href="personalMessage.html";
+                }
+            });
+
+        });
+
+
+    });
+
+</script>
+</html>

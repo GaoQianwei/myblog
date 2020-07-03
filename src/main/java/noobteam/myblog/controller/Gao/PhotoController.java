@@ -33,10 +33,10 @@ public class PhotoController {
      */
     @RequestMapping("/savePH")
     public String save(@RequestParam Map<String,String> map){
-        String msg="注册失败";
+        String msg="上传失败";
         boolean flag=photoService.doSave(map);
         if(flag){
-            msg="注册成功";
+            msg="上传成功";
         }
         return msg;
     }
