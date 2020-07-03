@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
     <script src="../js/jquery-3.4.1.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript">
 
@@ -82,15 +81,36 @@
             pages(1);
             rows(1);
         });
+
+        $(function() {
+
+            var target = $.cookie("usr_no");
+            $.post("/getdectlr", {"target": target}, function (rst) {
+                var currentImage = "";
+                var currentImage2 = "";
+                if (rst == "type1") {
+                    currentImage = "../images/blog/11.png";
+                    currentImage2 = "../images/blog/11.jpg";
+                }
+                if (rst == "type2") {
+                    currentImage = "../images/blog/14.png";
+                    currentImage2 = "../images/blog/13.jpg";
+                }
+                if (rst == "type3") {
+                    currentImage = "../images/blog/12.png";
+                    currentImage2 = "../images/blog/2_c.jpg";
+                }
+                if (rst == "type4") {
+                    currentImage = "../images/blog/9.jpg";
+                    currentImage2 = "../images/blog/9.jpg";
+                }
+                $("body").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+            });
+        });
+
     </script>
 </head>
-<body>
-<div class="search-box">
-    <input type="text" autocomplete="off" id="search" name="search" class="search-txt" placeholder="搜索关键词" />
-    <a class="search-btn" href="#">
-        <i class="fas fa-search"></i>
-    </a>
-</div>
+<body style="background-attachment: fixed;background-position:right top;background-size: 100% 100%;">
 <div class="container">
     <div class="row">
 

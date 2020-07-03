@@ -11,10 +11,6 @@ class FriendlistServiceTest {
     }
 
     @Test
-    void name() {
-    }
-
-    @Test
     void testDoDelete() {
     }
 

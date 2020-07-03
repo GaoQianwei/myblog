@@ -11,12 +11,12 @@
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+	<link rel="stylesheet" type="text/css" href="../css/style_elder.min.css" />
 </head>
 <body>
-<div>
+<div class="lyear-wrapper" style="background-attachment: fixed;background-position:right top;background-size: 100% 100%;">
 	<section class="mt-5 pb-5">
-		<div class="container">
+		<div class="container" >
 
 			<div class="row">
 				<!-- 文章列表 -->
@@ -191,5 +191,36 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script type="text/javascript">
+
+	$(function() {
+
+		var target = $.cookie("usr_no");
+		$.post("/getdectlr", {"target": target}, function (rst) {
+			var currentImage = "";
+			var currentImage2 = "";
+			if (rst == "type1") {
+				currentImage = "../images/blog/11.png";
+				currentImage2 = "../images/blog/11.jpg";
+			}
+			if (rst == "type2") {
+				currentImage = "../images/blog/14.png";
+				currentImage2 = "../images/blog/13.jpg";
+			}
+			if (rst == "type3") {
+				currentImage = "../images/blog/12.png";
+				currentImage2 = "../images/blog/2_c.jpg";
+			}
+			if (rst == "type4") {
+				currentImage = "../images/blog/9.jpg";
+				currentImage2 = "../images/blog/9.jpg";
+			}
+			$("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+		});
+	});
+
+</script>
 </body>
 </html>

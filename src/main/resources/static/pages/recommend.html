@@ -87,7 +87,7 @@
                   <div class="widget-title"><a href="decorate.html" style="color: azure">好友动态</a></div>
               </aside>
               <aside class="widget">
-                  <div class="widget-title"><a href="decorate.html" style="color: azure">好友列表</a></div>
+                  <div class="widget-title"><a href="center_Friendlist.html" style="color: azure">好友列表</a></div>
               </aside>
             <!-- 标签 -->
 
@@ -104,27 +104,29 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script>
 
 
     function addfrd(no) {
         //可以添加check检测已存在好友
-
-        $.post("/addfrd",{"user_no":"21e","friend_no":no},function (rst) {
+        var target=$.cookie("usr_no");
+        $.post("/addfrd",{"user_no":target,"friend_no":no},function (rst) {
             alert(rst);
         });
     }
 
         $(function(){
 
-            $.post("/getdectlr",{"target":"21e"},function (rst) {
+            var target=$.cookie("usr_no");
+            $.post("/getdectlr",{"target":target},function (rst) {
                 var currentImage="";
                 var currentImage2="";
                 if(rst=="type1") {currentImage="../images/blog/11.png";currentImage2="../images/blog/11.jpg";}
                 if(rst=="type2") {currentImage="../images/blog/14.png";currentImage2="../images/blog/13.jpg";}
                 if(rst=="type3") {currentImage="../images/blog/12.png";currentImage2="../images/blog/2_c.jpg";}
                 if(rst=="type4") {currentImage="../images/blog/9.jpg";currentImage2="../images/blog/9.jpg";}
-                $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed","background-position":"right top","background-size":"77% 100%"});
+                $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed","background-position":"right top","background-size":"100% 100%"});
                 $("header.lyear-header").css({"background-image":"url("+currentImage2+")"});
             });
             jQuery.post("/getrec",function(rst){//处理响应的结果
@@ -134,8 +136,8 @@
 			{
 				let json=rst[i];//{"tea_id":1,"tea_name":"zhagnsan","tea_sex":'',"tea_no":""}
 				body+="<tr>";
+				body+="<td>"+json.name+"</td>";
 				body+="<td>"+json.sex+"</td>";
-				body+="<td>"+json.email+"</td>";
 				body+="<td>"+json.description+"</td>";
 				body+="<td>";
 				body+="<a href='#'  onclick='addfrd(this.name)' name="+json.target+">添加好友</a>&nbsp;&nbsp;";

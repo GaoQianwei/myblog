@@ -9,7 +9,9 @@ import java.util.Map;
 @Mapper
 public interface RecommendMapper {
 
-    @Select("select sex,email,description,target from per_infomation")
+    @Select("select a.sex,a.email,a.description,a.target,b.name"+
+            " from per_infomation a inner join user b"+
+            " on a.target=b.no")
     public List<Map<String,Object>> GetRec();
 
     @Insert("insert into friendship(user_no,friend_no)"+
