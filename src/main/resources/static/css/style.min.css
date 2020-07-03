@@ -7,12 +7,19 @@
 /* --------------------------------- *
  * 重设样式
  * --------------------------------- */
-body {
+html{
+	height: 100%;
+}
+ 
+body{
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     font-size: 14px;
     line-height: 1.7;
     background-color: #fff;
     color: #4d5259;
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 a {
     color: #4d5259;
@@ -203,12 +210,47 @@ i[class*='mdi'] {
 .lyear-header .nav-link:hover {
     color: rgba(255, 255, 255, 1);
 }
+
 /* 搜索框 */
-.lyear-search-form .form-control {
-    border-radius: 100px;
-    background-color: rgba(255, 255, 255, 0.125);
-    border-color: rgba(255,255,255,.125);
-    color: #fff;
+.search-box{
+    position: absolute;
+    top:120px;
+    left:80%;
+    transform: translate(-50%,-50%);
+    background: #2f3640;
+    height: 60px;
+    border-radius: 60px;
+    padding: 15px;
+}
+.search-box:hover>.search-txt{
+    width: 240px;
+    padding: 0px;
+}
+.search-box:hover>.search-btn{
+    background: white;
+}
+.search-btn{
+    color: #e84118;
+    float:right ;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-txt{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 30px;
+    width: 0px;
 }
 
 /* --------------------------------- *
