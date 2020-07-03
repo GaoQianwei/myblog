@@ -16,6 +16,12 @@ public interface CommentMapper {
     @Select("select * from comment where art_target=#{n}")
     public List<Map<String,Object>> findByTar(String tar);
 
+    @Select("select a.name , b.date, b.text" +
+            " from user a inner join comment b" +
+            " on a.no = b.usr_target" +
+            " where art_target=#{n}")
+    public List<Map<String,Object>> findByTarGet(String tar);
+
     @Insert("insert into comment(date,text,usr_target,art_target)" +
             "value(#{com.date},#{com.text},#{com.usr_target},#{com.art_target})")
     public int save(@Param("com") Map<String,String> map);

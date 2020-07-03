@@ -83,7 +83,7 @@
     jQuery(function(){
         //var art_target="8";
         var art_target=$.getUrlParam('aid');
-        jQuery.post("/com_art",{"art_target":art_target},function (rst){//处理响应的结果
+        jQuery.post("/com_art_usr",{"art_target":art_target},function (rst){//处理响应的结果
             var body="";
             for (var i=0; i<rst.length; i++) {
                 var json=rst[i];
@@ -93,7 +93,7 @@
                     "	<img class=\"d-flex mr-3 rounded-circle\" src=\"../images/author.jpg\" alt='1'>\r\n" +
                     "<div class=\"media-body\">\r\n" +
                     "<a href=\"#!\" class=\"text-custom reply-btn\" data-id=\"1\"><i class=\"mdi mdi-reply\"></i>&nbsp; 回复</a>\r\n" +
-                    "	<h4 class=\"media-heading\"><a href=\"#!\">花满楼</a></h4>\r\n" +
+                    "	<h4 class=\"media-heading\"><a href=\"#!\">"+json.name+"</a></h4>\r\n" +
                     "	 <p class=\"text-muted post-date\">"+json.date+"</p>\r\n" +
                     "<p>"+json.text+"</p>" +
                     "</div>\r\n" +
@@ -129,7 +129,7 @@
             var time=year+"-"+month+"-"+date+" "+hour+":"+minute;
             //var art_target="8";
             var art_target=$.getUrlParam('aid');
-            //var usr_target="1000000009";
+            //var usr_target="8622584363";
             var usr_target=jQuery.cookie("usr_no");
             var comment=jQuery("#comment").val();
             jQuery.post("/com_save",{"date":time,"text":comment,"usr_target":usr_target,"art_target":art_target},function(rst){

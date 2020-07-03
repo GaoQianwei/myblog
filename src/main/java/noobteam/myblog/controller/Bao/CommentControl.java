@@ -28,6 +28,13 @@ public class CommentControl {
         return list;
     }
 
+    @RequestMapping("/com_art_usr")
+
+    public List<Map<String,Object>> findByTarGet(@RequestParam Map<String,String> map){
+        List<Map<String,Object>> list=commentService.findByTarGet(map);
+        return list;
+    }
+
     @RequestMapping("/com_save")
 
     public String save(@RequestParam Map<String,String> map){

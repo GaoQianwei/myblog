@@ -88,5 +88,16 @@ public class CommentService {
         }
         return list;
     }
+
+    public List<Map<String,Object>> findByTarGet(Map<String,String> map){
+        List<Map<String,Object>> list=null;
+        try {
+            String tar=map.get("art_target");
+            list=commentMapper.findByTarGet(tar);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
 
