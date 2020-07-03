@@ -8,20 +8,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<meta name="author" content="yinqi" />
+<meta name="author" content="gnoch" />
 
 <!--title icon setting-->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <!--link_set-->
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
-</head>
+<link rel="stylesheet" type="text/css" href="../css/style_elder.min.css" />
 
+</head>
+<style>
+    a{
+        color: azure;
+    }
+</style>
 
 
 <body>
-<header  class="lyear-header text-center" style="background-image: url(../images/left-bg.jpg); height: 100%;">
+<header  class="lyear-header text-center" style=" height: 100%;">
   <div class="lyear-header-container">
     <div class="lyear-mask"></div>
     <h1 class="lyear-blogger pt-lg-4 mb-0"><a href="index.html">笔下光年的博客</a></h1>
@@ -63,7 +68,7 @@
   </nav>
   </div>
 </header>
-<div class="lyear-wrapper" style="background-image:url(../images/blog/post-1.png);background-attachment: fixed;background-position:right top;background-size: 77% 100%;">
+<div class="lyear-wrapper" style="background-attachment: fixed;background-position:right top;background-size: 77% 100%;">
   <section class="mt-5 pb-5">
     <div class="container">
 
@@ -73,23 +78,23 @@
 
           <article class="lyear-arc">
             <div class="arc-header">
-              <h3 class="arc-title">装扮设置</h3>
-				<div>————————————————————————————</div>
+              <h3 class="arc-title" style="color: azure">装扮设置</h3>
+				<div style="color: azure">————————————————————————————</div>
 				<h5> <a href="#" class="typeset">type1</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
+				              <a href="../images/blog/sample1.png"><img src="../images/blog/sample1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
 				<h5> <a href="#" class="typeset">type2</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
+				              <a href="../images/blog/sample2.png"><img src="../images/blog/sample2.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
 				<h5> <a href="#" class="typeset">type3</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
+				              <a href="../images/blog/sample3.png"><img src="../images/blog/sample3.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
 				<h5> <a href="#" class="typeset">type4</a></h5>
 				<div class="arc-preview">
-				              <a href="#"><img src="../images/blog/post-1.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
+				              <a href="../images/blog/sample4.png"><img src="../images/blog/sample4.png" alt="" class="img-fluid rounded" height="400" width="500"></a>
 				            </div>
 
             </div>
@@ -143,24 +148,28 @@
 
         $.post("/getdectlr",{"target":"21e"},function (rst) {
             var currentImage="";
-            if(rst=="type1") currentImage="../images/blog/post-1.png";
-            if(rst=="type2") currentImage="../images/blog/post-2.png";
-            if(rst=="type3") currentImage="../images/blog/post-1.png";
-            if(rst=="type4") currentImage="../images/blog/timg.png";
+            var currentImage2="";
+            if(rst=="type1") {currentImage="../images/blog/11.png";currentImage2="../images/blog/11.jpg";}
+            if(rst=="type2") {currentImage="../images/blog/14.png";currentImage2="../images/blog/13.jpg";}
+            if(rst=="type3") {currentImage="../images/blog/12.png";currentImage2="../images/blog/2_c.jpg";}
+            if(rst=="type4") {currentImage="../images/blog/9.jpg";currentImage2="../images/blog/9.jpg";}
             $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+            $("header.lyear-header").css({"background-image":"url("+currentImage2+")"});
         });
 
         $("a.typeset").click(function(){
             var currentImage="../images/blog/post-1.png";
             var typemsg=$(this).text();
-            if(typemsg=="type1") currentImage="../images/blog/wall_1.png";
-            if(typemsg=="type2") currentImage="../images/blog/post-2.png";
-            if(typemsg=="type3") currentImage="../images/blog/post-1.png";
-            if(typemsg=="type4") currentImage="../images/blog/timg.png";
+            var currentImage2="";
+            if(typemsg=="type1") {currentImage="../images/blog/11.png";currentImage2="../images/blog/11.jpg";}
+            if(typemsg=="type2") {currentImage="../images/blog/14.png";currentImage2="../images/blog/13.jpg";}
+            if(typemsg=="type3") {currentImage="../images/blog/12.png";currentImage2="../images/blog/2_c.jpg";}
+            if(typemsg=="type4") {currentImage="../images/blog/9.jpg";currentImage2="../images/blog/9.jpg";}
             $.post("/dectlr",{"dectype":typemsg,"target":"21e"},function (rst) {
-                alert(rst);
+
             });
              $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+            $("header.lyear-header").css("background-image","url("+currentImage2+")");
 
 
         });

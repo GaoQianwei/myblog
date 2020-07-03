@@ -15,7 +15,7 @@
 <!--link_set-->
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="../css/materialdesignicons.min.css" />
-<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+<link rel="stylesheet" type="text/css" href="../css/style_elder.min.css" />
 </head>
 <body>
 <div class="lyear-wrapper">
@@ -28,15 +28,31 @@
 
           <article class="lyear-arc">
             <div class="arc-header">
-              <h3 class="arc-title">好友推荐</h3>
-				<div>————————————————————————————</div>
-<table class="table table-bordered table-striped table-hover text-center">
+              <h3 class="arc-title" style="color:azure;">好友推荐</h3>
+				<div style="color: azure">————————————————————————————</div>
+<table class="table table-bordered table-striped table-hover text-center" style="background-color: whitesmoke">
+    <thead>
+    <td>昵称</td>
+    <td>性别</td>
+    <td>email</td>
+    <td>操作</td>
+    </thead>
 				<tbody>
 
 				</tbody>
 
+    <tfoot>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    </tfoot>
 			</table>
-				
+
+
             </div>
 
            
@@ -54,24 +70,24 @@
 
         <!-- 侧边栏 -->
         <div class="col-xl-4">
-          <div class="lyear-sidebar">
+          <div class="lyear-sidebar" >
             <!-- 热门文章 -->
             <aside class="widget widget-hot-posts">
-              <div class="widget-title"><a href="recommend.html">好友推荐</a></div>
+              <div class="widget-title"><a href="recommend.html" style="color: azure">好友推荐</a></div>
             </aside>
 
             <!-- 归档 -->
             <aside class="widget">
-              <div class="widget-title"><a href="visitset.html">访问管理</a></div>
+              <div class="widget-title"><a href="visitset.html" style="color: azure">访问管理</a></div>
             </aside>
 			<aside class="widget">
-              <div class="widget-title"><a href="decorate.html">装扮设置</a></div>
+              <div class="widget-title"><a href="decorate.html" style="color: azure">装扮设置</a></div>
             </aside>
               <aside class="widget">
-                  <div class="widget-title"><a href="decorate.html">好友动态</a></div>
+                  <div class="widget-title"><a href="decorate.html" style="color: azure">好友动态</a></div>
               </aside>
               <aside class="widget">
-                  <div class="widget-title"><a href="decorate.html">好友列表</a></div>
+                  <div class="widget-title"><a href="decorate.html" style="color: azure">好友列表</a></div>
               </aside>
             <!-- 标签 -->
 
@@ -89,8 +105,29 @@
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script>
-	jQuery(function(){
-		jQuery.post("/getrec",function(rst){//处理响应的结果
+
+
+    function addfrd(no) {
+        //可以添加check检测已存在好友
+
+        $.post("/addfrd",{"user_no":"21e","friend_no":no},function (rst) {
+            alert(rst);
+        });
+    }
+
+        $(function(){
+
+            $.post("/getdectlr",{"target":"21e"},function (rst) {
+                var currentImage="";
+                var currentImage2="";
+                if(rst=="type1") {currentImage="../images/blog/11.png";currentImage2="../images/blog/11.jpg";}
+                if(rst=="type2") {currentImage="../images/blog/14.png";currentImage2="../images/blog/13.jpg";}
+                if(rst=="type3") {currentImage="../images/blog/12.png";currentImage2="../images/blog/2_c.jpg";}
+                if(rst=="type4") {currentImage="../images/blog/9.jpg";currentImage2="../images/blog/9.jpg";}
+                $("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed","background-position":"right top","background-size":"77% 100%"});
+                $("header.lyear-header").css({"background-image":"url("+currentImage2+")"});
+            });
+            jQuery.post("/getrec",function(rst){//处理响应的结果
 			var body="";
 
 			for(let i=0;i<rst.length;i++)
@@ -105,21 +142,20 @@
 				body+="<a href='#' onclick=''>查看空间</a>";
 				body+="</td>"
 				body+="</tr>";
+
 			}
 			jQuery("tbody").html(body);
+
+
 		},"json");
+
+
 
 
 	});
 
 
-    function addfrd(no) {
-        //可以添加check检测已存在好友
 
-        $.post("/addfrd",{"user_no":"21e","friend_no":no},function (rst) {
-            alert(rst);
-        });
-    }
 
 
 </script>
