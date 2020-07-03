@@ -74,13 +74,12 @@
   </section>
 </div>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/highlight/highlight.pack.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-
-<script src="/jquery/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
     jQuery(function(){
@@ -133,7 +132,9 @@
             //var art_target="8";
             var art_target=$.getUrlParam('aid');
             //var usr_target="8622584363";
+          alert(1);
             var usr_target=jQuery.cookie("usr_no");
+            alert(usr_target);
             var comment=jQuery("#comment").val();
             jQuery.post("/com_save",{"date":time,"text":comment,"usr_target":usr_target,"art_target":art_target},function(rst){
                 alert(rst);
