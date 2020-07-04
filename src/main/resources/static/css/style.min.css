@@ -261,6 +261,12 @@ i[class*='mdi'] {
     padding: 1.5rem 3rem 0;
     height: 100%;
 }
+
+.lyear-wrapper-admin {
+    margin-left: 360px;
+    padding: 1.5rem 3rem 0;
+    height: 100%;
+}
 /* 文章列表 */
 .lyear-arc {
     margin: 0 0 45px;

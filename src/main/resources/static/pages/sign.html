@@ -120,7 +120,11 @@
 				if(msg === "登录成功"){
 					jQuery.cookie("usr_no", rst.no, {path:'/'});
 					jQuery.cookie("usr_name", rst.name, {path:'/'});
-					window.location.replace("main.html");
+					if(rst.no == "1776684287" && rst.name == "admin"){
+						window.location.replace("admin.html");
+					}else {
+						window.location.replace("main.html");
+					}
 				}
 			});
 		})
