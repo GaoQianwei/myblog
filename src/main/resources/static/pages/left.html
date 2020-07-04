@@ -30,8 +30,9 @@
 
 			<div id="navigation">
 				<div class="profile-section pt-3 pt-lg-0">
-					<img class="profile-image mb-3 rounded-circle mx-auto" src="../images/lyear.png" width="120" height="120" alt="笔下光年" >
-					<div class="lyear-sentence mb-3">必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。</div>
+					<img class="profile-image mb-3 rounded-circle mx-auto" src="../images/lyear.png" id="Image" width="120" height="120" alt="笔下光年" >
+					<div class="lyear-sentence mb-3">必须记住我们学习的时间是有限的,不要虚度人身。我的个人说明是：</div>
+					<div class="lyear-sentence mb-3" id="signature_info"></div>
 					<hr>
 				</div>
 
@@ -63,77 +64,7 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
-<script type="text/javascript">
-	jQuery(function() {
 
-		jQuery.post("/allPI",function(rst){
-
-			/**
-			 * CurrentUserId为当前使用者的user_no号
-			 *
-			 * 将从cookie获取的usr_no赋给它
-			 *
-			 * @type {number}
-			 */
-			var cookies=document.cookie.split(";");
-			for(var i=0;i<cookies.length;i++)
-			{
-				var cookie=cookies[i].trim();
-				if(cookie.indexOf("usr_no")==0)
-				{
-					var CurrentUserNo=cookie.substring("usr_no".length+1);
-				}
-			}
-
-			for(var i=0;i<rst.length;i++)
-			{
-				var json=rst[i];
-				if(json.target==CurrentUserNo)
-				{
-					var CurrentUserId=i;
-					break;
-				}
-			}
-
-
-			var json=rst[CurrentUserId];
-
-			//jQuery("#current_user_id").val(json.id);
-			//头像
-			//Todo
-			var imagePath=json.image;
-			$("#Image").attr('src',imagePath);
-			//jQuery("#current_image_path").val(imagePath);
-
-			//签名
-			//document.getElementById("signature_info").innerHTML=json.signature;
-
-			//性别
-			//$("input[type=radio][name='u_sex'][value="+json.sex+"]").attr("checked",true);
-
-			/**
-			 * $("input[name='u_sex']").each(function (index,element) {
-
-                if($(this).val==json.sex){
-                    $(this).prop("checked",true);
-                }
-            })
-			 */
-					//生日
-			//var birthDate=json.birth;
-			//$('#birth').val(birthDate);
-
-			//邮箱
-			//document.getElementById("email").innerHTML=json.email;
-
-			document.getElementById("signature_info").innerHTML=json.description;
-		},"json");
-	});
-
-
-
-
-</script>
 <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 <script type="text/javascript">
@@ -167,6 +98,39 @@
 			}
 			$("header.lyear-header").css({"background-image": "url(" + currentImage2 + ")"});
 		});
+
+		jQuery.post("/allPI",function(rst){
+
+
+			var cookies=document.cookie.split(";");
+			for(var i=0;i<cookies.length;i++)
+			{
+				var cookie=cookies[i].trim();
+				if(cookie.indexOf("usr_no")==0)
+				{
+					var CurrentUserNo=cookie.substring("usr_no".length+1);
+				}
+			}
+
+			for(var i=0;i<rst.length;i++)
+			{
+				var json=rst[i];
+				if(json.target==CurrentUserNo)
+				{
+					var CurrentUserId=i;
+					break;
+				}
+			}
+
+			var json=rst[CurrentUserId];
+
+			var imagePath=json.image;
+			$("#Image").attr('src',imagePath);
+
+			document.getElementById("signature_info").innerHTML=json.description;
+		},"json");
+
+
 	});
 
 </script>
