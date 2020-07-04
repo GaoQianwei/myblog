@@ -38,5 +38,9 @@ public class VisitsetMapperTest {
 
     @Test
     public void getDec() {
+        Map<String, String> map=new HashMap<>();
+        map.put("target","1454224428");
+        String m=visitsetMapper.GetDec(map);
+        System.out.println(m);
     }
 }

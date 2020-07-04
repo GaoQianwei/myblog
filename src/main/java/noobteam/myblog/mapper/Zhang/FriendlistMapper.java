@@ -13,7 +13,10 @@ public interface FriendlistMapper {
     public int delete(int id);
 
 
-    @Select("select friend_name from friend where fr_no=#{f.fr_no}")
+    @Select("select a.name from "+
+            " user a inner join friendship b "+
+            " on a.no=b.friend_no" +
+            "where a.no==#{n}")
     public static List<Map<String, String>> name(@Param("f") Map<String, String> map) {
         return null;
     }

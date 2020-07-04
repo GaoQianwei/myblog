@@ -52,7 +52,7 @@
 									</div>
 									<div class="hr"></div>
 									<div class="foot-lnk">
-										<a href="/pages/pwdReset.html">Forgot Password?</a>
+										<a href="/pages/pwdReset.html" class="forget-pwd">Forgot Password?</a>
 									</div>
 								</div>
 								<div class="sign-up-htm">
@@ -141,10 +141,11 @@
 			})
 			if (judge_three && judge_one) {
 				jQuery.post("/signup", js, function (rst) {
-					if (rst === true)
-						alert("注册成功")
-					else
-						alert("注册失败")
+					if (rst === true){
+						alert("注册成功");
+						window.location.reload();
+					} else
+						alert("注册失败");
 				})
 			}
 		})

@@ -257,7 +257,7 @@ i[class*='mdi'] {
  * 右侧
  * --------------------------------- */
 .lyear-wrapper {
-    margin-left: 360px;
+    margin-left: 0px;
     padding: 1.5rem 3rem 0;
     height: 100%;
 }

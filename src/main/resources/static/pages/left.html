@@ -30,9 +30,8 @@
 
 			<div id="navigation">
 				<div class="profile-section pt-3 pt-lg-0">
-					<img class="profile-image mb-3 rounded-circle mx-auto" id="Image" src="../images/lyear.png" width="120" height="120" alt="笔下光年" >
-					<div class="lyear-sentence mb-3"  >时光似箭，日月如梭，莫要负了自己的时间，以下是我的个人说明：</div>
-					<div class="lyear-sentence mb-3" id="signature_info" >必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。</div>
+					<img class="profile-image mb-3 rounded-circle mx-auto" src="../images/lyear.png" width="120" height="120" alt="笔下光年" >
+					<div class="lyear-sentence mb-3">必须记住我们学习的时间是有限的。时间有限，不只由于人生短促，更由于人事纷繁。我们就应力求把我们所有的时间用去做最有益的事情。</div>
 					<hr>
 				</div>
 
@@ -133,6 +132,42 @@
 
 
 
+
+</script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script type="text/javascript">
+
+	var name=jQuery.cookie("usr_name");
+	var code =name;
+	code+="的博客"
+	jQuery("#name").html(code);
+
+	$(function() {
+
+		var target = $.cookie("usr_no");
+		$.post("/getdectlr", {"target": target}, function (rst) {
+			var currentImage = "";
+			var currentImage2 = "";
+			if (rst == "type1") {
+				currentImage = "../images/blog/11.png";
+				currentImage2 = "../images/blog/11.jpg";
+			}
+			if (rst == "type2") {
+				currentImage = "../images/blog/14.png";
+				currentImage2 = "../images/blog/13.jpg";
+			}
+			if (rst == "type3") {
+				currentImage = "../images/blog/12.png";
+				currentImage2 = "../images/blog/2_c.jpg";
+			}
+			if (rst == "type4") {
+				currentImage = "../images/blog/9.jpg";
+				currentImage2 = "../images/blog/9.jpg";
+			}
+			$("header.lyear-header").css({"background-image": "url(" + currentImage2 + ")"});
+		});
+	});
 
 </script>
 </body>

@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../js/highlight/styles/agate.css" />
   <link rel="stylesheet" type="text/css" href="../css/style.min.css" />
 </head>
-<body>
+<body style="background-attachment: fixed;background-position:right top;background-size: 100% 100%;">
 <div>
   <section class="mt-5 pb-5">
     <div class="container">
@@ -81,6 +81,32 @@
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
+
+  $(function() {
+
+    var target = $.cookie("usr_no");
+    $.post("/getdectlr", {"target": target}, function (rst) {
+      var currentImage = "";
+      var currentImage2 = "";
+      if (rst == "type1") {
+        currentImage = "../images/blog/11.png";
+        currentImage2 = "../images/blog/11.jpg";
+      }
+      if (rst == "type2") {
+        currentImage = "../images/blog/14.png";
+        currentImage2 = "../images/blog/13.jpg";
+      }
+      if (rst == "type3") {
+        currentImage = "../images/blog/12.png";
+        currentImage2 = "../images/blog/2_c.jpg";
+      }
+      if (rst == "type4") {
+        currentImage = "../images/blog/9.jpg";
+        currentImage2 = "../images/blog/9.jpg";
+      }
+      $("body").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+    });
+  });
 
   jQuery(function(){
     //var art_target="8";
