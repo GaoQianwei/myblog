@@ -12,12 +12,16 @@ public class FriendlistService {
 
     @Resource
     private FriendlistMapper friendlistMapper;
-    public String Name(Map<String,String>map){
-        String n=map.get("friend_name");
-        Map<String,String> f= new HashMap<>() ;
-        f.put("fr_no",map.get("fr_no"));
-        n= String.valueOf(FriendlistMapper.name(f));
-        return n;
+
+    public List<Map<String,Object>> Name(Map<String,String>map){
+        List<Map<String,Object>> list=null;
+        try {
+            String tar=map.get("user_no");
+            list=friendlistMapper.name(tar);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public boolean doDelete(Map<String, String> map) {

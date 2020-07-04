@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,12 +19,13 @@ public class FriendlistController {
      * @param map
      */
     @RequestMapping("/getname")
-    public void getname(@RequestParam Map<String,String> map){
+    public List<Map<String,Object>> getname(@RequestParam Map<String,String> map){
 
-        String rst=friendlistService.Name(map);
+        List<Map<String,Object>> list=friendlistService.Name(map);
 
-        System.out.println(rst);
+        return list;
     }
+
     @RequestMapping("/deletefr")
     public String delete(@RequestParam Map<String,String> map){
         String msg="删除失败";

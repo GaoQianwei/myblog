@@ -141,20 +141,9 @@
                             <div id=friendlist>
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
                                 <table id="myTable">
-                                    <tbody>
-                                    <tr id="fr1">
-                                        <td><a href="#" name="fr_id" onclick="getFrName()">好友1</a></td> <td><button id="fr1_dl" type="button" onclick="doDelete()">删除好友</button></td>
-                                    </tr>
-                                    <tr id="fr2">
-                                        <td><a href="#" name="fr_id" onclick="getFrName()">好友2</a></td> <td><button id="fr2_dl" type="button" onclick="doDelete()">删除好友</button></td>
-                                    </tr>
-                                    <tr id="fr3">
-                                        <td><a href="#" name="fr_id" onclick="getFrName()">好友3</a></td> <td><button id="fr3_dl" type="button" onclick="doDelete()">删除好友</button></td>
-                                    </tr>
-                                    <tr id="fr4">
-                                        <td><a href="#" name="fr_id" onclick="getFrName()">好友4</a></td> <td><button id="fr4_dl" type="button" onclick="doDelete()">删除好友</button></td>
-                                    </tr>
-                                    </tbody></table></div>
+                                    <tbody id="fbody">
+                                    </tbody>
+                                </table></div>
                         </aside>
 
 
@@ -173,83 +162,42 @@
 <script type="text/javascript" src="../js/main.min.js"></script>
 <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </body>
-<!--删除好友-->
-<script>
-    $(document).ready(function(){
-        $("#fr1_dl").click(function(){
-            $("tr").remove("#fr1");
-        });
-        $("#fr2_dl").click(function(){
-            $("tr").remove("#fr2");
-        });
-        $("#fr3_dl").click(function(){
-            $("tr").remove("#fr3");
-        });
-        $("#fr4_dl").click(function(){
-            $("tr").remove("#fr4");
-        });
-    });
-</script>
 <script>
     jQuery(function(){
-//页面加载完毕，就去数据库中获取数据
-//          /all 请求的地址
-        jQuery.post("/all",function(rst){//处理响应的结果
-            var fr_no=$(t).parents("tr").attr("id");
-        },"json");//表示返回数据的格式
-    });//如果是通过function定义的方法必须在jquery外面写
-    function showDelModal(id,name)
-    {
-        jQuery("#del_id").val(id);
-        jQuery("#del_msg").html(name);
-        jQuery("#delModal").modal("show");
-    }
-    function doDelete()
-    {
-        jQuery("#delModal").modal("hide");
-        var id=jQuery("#del_id").val();
-//json格式的属性名称必须与后台对应
-        jQuery.post("/delete",{"id":id},function(rst){
-            alert(rst);
-//如果删除成功，重新加载数据
-            if(rst=='删除成功')
-            {
-//重新加载本页面
-                location.reload();
-            }
-        });
-    }
-    function getFrName()
-    {
         var target=$.cookie("usr_no");
-
-        $.post("/getname",{"user_no":target,"friend_no":no},function (rst) {
-            alert(rst);
-        });
-
-    }
-</script>
-<!--搜索好友-->
-<script>
-    function myFunction() {
-        // Declare variables
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+        jQuery.post("/getname",{"user_no":target},function (rst) {//处理响应的结果
+            var body="";
+            for (var i=0; i<rst.length; i++) {
+                var json=rst[i];
+                body +=
+                    "<div id='fr"+i+"'>\r\n" +
+                    "<div class=\"media\">\r\n" +
+                    "	<img class=\"d-flex mr-3 rounded-circle\" src=\"../images/author.jpg\" alt='1'>\r\n" +
+                    "<div class=\"media-body\">\r\n" +
+                    "	<h4 class=\"media-heading\"><a href=\"#\">"+json.name+"</a></h4>\r\n" +
+                    "<li><a id='"+i+"' onclick='doDelete("+i+");'>删除好友</a></li>" +
+                    "</div>\r\n" +
+                    "</div>\r\n" +
+                    "</div>";
             }
+            jQuery("#friendlist").html(body);
+        },"json");//表示返回数据的格式
+    });
+
+    function doDelete(i) {
+        if(i==0){
+            $("div").remove("#fr0");
         }
+        if(i==1){
+            $("div").remove("#fr1");
+        }
+        if(i==2){
+            $("div").remove("#fr2");
+        }
+        if(i==3){
+            $("div").remove("#fr3");
+        }
+
     }
 </script>
 </html>

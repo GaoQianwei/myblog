@@ -55,7 +55,7 @@
             jQuery.post("/art_usr",{"target":target},function (rst){//处理响应的结果
                 var body="";
                 for (var i=5*(p-1); i<rst.length&&i<5*(p-1)+5; i++) {
-                    var json=rst[i];
+                    var json=rst[rst.length-1-i];
                     body +=
                         "<div>\r\n" +
                         "<h2>\r\n" +
