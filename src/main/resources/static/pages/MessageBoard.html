@@ -120,14 +120,14 @@
                     <div class="form-group form-group-lg">
                         <label class="control-label col-lg-2">内容:</label>
                         <div class="col-lg-8">
-                            <input type="text" name="name" id="name" class="form-control"
+                            <input autocomplete="off" type="text" name="name" id="name" class="form-control"
                                    placeholder="请输入留言内容">
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="control-label col-lg-2">昵称:</label>
                         <div class="col-lg-8">
-                            <input type="text" name="sex" id="sex" class="form-control"
+                            <input autocomplete="off" type="text" name="sex" id="sex" class="form-control"
                                     placeholder="请输入您的昵称">
                         </div>
                     </div>
@@ -170,8 +170,21 @@
          * @type {Date}
          */
 
-        var today=new Date();
-        var submitTime=today.getFullYear()+'.'+(today.getMonth()+1)+'.'+today.getDate();
+        var now = new Date();
+        var year=now.getFullYear();
+        var month=now.getMonth()+1;
+        var date=now.getDate();
+        var hour=now.getHours();
+        var minute=now.getMinutes();
+        if (month<10)
+            month="0"+month;
+        if (date<10)
+            date="0"+date;
+        if (hour<10)
+            hour="0"+hour;
+        if (minute<10)
+            minute="0"+minute;
+        var submitTime=year+"-"+month+"-"+date+" "+hour+":"+minute;
         $("#noT").attr('value',submitTime);
 
         jQuery("#btn_reg").click(function(){
