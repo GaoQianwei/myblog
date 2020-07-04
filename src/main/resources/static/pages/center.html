@@ -149,19 +149,22 @@
 
 						<aside class="widget">
 							<div class="widget-title"><a href="personalMessage.html"> 个人档</a></div>
-							<li><i></i> <a href="personalMessage.html">19岁 &emsp; 男 &emsp; 摩羯座 &emsp; 现居黄冈</a></li>
+							<div class="" id="sex" >男</div>
+							<div class="" id="birth" ></div>
+							<div class="" id="signature" ></div>
 						</aside>
+
 
 						<!-- 归档 -->
 						<aside class="widget">
-							<div class="widget-title"><a href="MessageBoard.html"> 留言</a></div>
-							<tr>
-								<td> 端午节快乐！</td>
-								<td>&emsp;&emsp;&emsp;</td>
-								<td>
-									<a href="#"> from 荒</a>
-								</td>
-							</tr>
+							<div class="widget-title"><a href="MessageBoard.html">最新留言</a></div>
+
+							<div class="" id="visitor" style="font-size: 20px;color: red;"></div>
+							<div class="" id="time" style="font-size: 15px"></div>
+							<div></div>
+							<div></div>
+							<div class="" id="text" style="font-size: 20px">
+							</div>
 						</aside>
 
 						<!-- 标签
@@ -191,5 +194,74 @@
 <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/main.min.js"></script>
+<script type="text/javascript">
+	jQuery(function() {
+
+		jQuery.post("/allPI",function(rst){
+
+			var cookies=document.cookie.split(";");
+			for(var i=0;i<cookies.length;i++)
+			{
+				var cookie=cookies[i].trim();
+				if(cookie.indexOf("usr_no")==0)
+				{
+					var CurrentUserNo=cookie.substring("usr_no".length+1);
+				}
+			}
+
+			for(var i=0;i<rst.length;i++)
+			{
+				var json=rst[i];
+				if(json.target==CurrentUserNo)
+				{
+					var CurrentUserId=i;
+					break;
+				}
+			}
+
+
+			var json=rst[CurrentUserId];
+
+			//签名
+			document.getElementById("signature").innerHTML=json.signature;
+
+			document.getElementById("sex").innerHTML=json.sex;
+
+			document.getElementById("birth").innerHTML=json.birth;
+
+		},"json");
+
+		jQuery.post("/allMB",function(rst){//处理响应的结果
+
+			var cookies=document.cookie.split(";");
+			for(var i=0;i<cookies.length;i++)
+			{
+				var cookie=cookies[i].trim();
+				if(cookie.indexOf("usr_no")==0)
+				{
+					var CurrentUserNo=cookie.substring("usr_no".length+1);
+				}
+			}
+
+			for(var i=0;i<rst.length;i++)
+			{
+				var json=rst[i];//{"id":1,"text":"zhagcwefnsan","visit_tar":'',"data":""}
+
+
+				if(CurrentUserNo==json.host_tar)
+				{
+					var text=json.text;
+					var time=json.data;
+					var visitor=json.visit_tar;
+				}
+				document.getElementById("text").innerHTML=text;
+				document.getElementById("time").innerHTML=time;
+				document.getElementById("visitor").innerHTML=visitor;
+			}
+		},"json");//表示返回数据的格式
+	});
+
+</script>
+
 </body>
 </html>
