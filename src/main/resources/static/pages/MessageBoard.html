@@ -21,7 +21,7 @@
     </style>
 
 </head>
-<body class="msgbg">
+<body>
 <p>留言板</p>
     <!--
         containerT中是留言板的输入与留言的部分，
@@ -283,5 +283,35 @@
             }
         })
     }
+
+    $(function() {
+
+        var target = $.cookie("usr_no");
+        $.post("/getdectlr", {"target": target}, function (rst) {
+            var currentImage = "";
+            var currentImage2 = "";
+            if (rst == "type1") {
+                currentImage = "../images/blog/11.png";
+                currentImage2 = "../images/blog/11.jpg";
+            }
+            if (rst == "type2") {
+                currentImage = "../images/blog/14.png";
+                currentImage2 = "../images/blog/13.jpg";
+            }
+            if (rst == "type3") {
+                currentImage = "../images/blog/12.png";
+                currentImage2 = "../images/blog/2_c.jpg";
+            }
+            if (rst == "type4") {
+                currentImage = "../images/blog/9.jpg";
+                currentImage2 = "../images/blog/9.jpg";
+            }
+            $("body").css({
+                "background-size": "100% 100%",
+                "background-image": "url(" + currentImage + ")",
+                "background-attachment": "fixed"
+            });
+        });
+    });
 </script>
 </html>

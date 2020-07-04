@@ -24,30 +24,42 @@
                 pageCount=Math.floor(pageCount);
                 var codePage = "";
                 codePage +=
-                    "<li><a id='"+0+"' onclick='pages("+1+");rows("+1+");'>首页</a></li>";
+                    "<li><a href='#' id='"+0+"' onclick='pages("+1+");rows("+1+");'>首页</a></li>";
                 for (var j=np-2; j<=np+2; j++) {
                     if(j > pageCount && j > 5){
                         codePage +=
-                            "<li><a id='"+(j-5)+"' onclick='pages("+(j-5)+");rows("+(j-5)+");'>"+(j-5)+"</a></li>";
+                            "<li><a href='#' id='"+(j-5)+"' onclick='pages("+(j-5)+");rows("+(j-5)+");'>"+(j-5)+"</a></li>";
                     }
                 }
                 for (var j=np-2; j<=np+2; j++) {
                     if(j >= 1 && j <= pageCount) {
                         codePage +=
-                            "<li><a id='"+j+"' onclick='pages("+j+");rows("+j+");'>"+j+"</a></li>";
+                            "<li><a href='#' id='"+j+"' onclick='pages("+j+");rows("+j+");'>"+j+"</a></li>";
                     }
                 }
                 for (var j=np-2; j<=np+2; j++) {
                     if(j < 1 && j+5 <= pageCount){
                         codePage +=
-                            "<li><a id='"+(j+5)+"' onclick='pages("+(j+5)+");rows("+(j+5)+");'>"+(j+5)+"</a></li>";
+                            "<li><a href='#' id='"+(j+5)+"' onclick='pages("+(j+5)+");rows("+(j+5)+");'>"+(j+5)+"</a></li>";
                     }
                 }
                 codePage +=
-                    "<li><a id='"+pageCount+"' onclick='pages("+pageCount+");rows("+pageCount+");'>尾页</a></li>";
+                    "<li><a href='#' id='"+pageCount+"' onclick='pages("+pageCount+");rows("+pageCount+");'>尾页</a></li>";
                 jQuery("#page-size").html(codePage);
             },"json");//表示返回数据的格式
         }
+
+        function art_delete(id){
+
+            jQuery.post("/art_delete",{"id":id},function (rst){
+                alert(rst);
+                if(rst=='删除成功')
+                {
+                    location.reload();
+                }
+            });
+        }
+
 
             function pages(p){
             //var target="8622584363";
@@ -60,6 +72,7 @@
                         "<div>\r\n" +
                         "<h2>\r\n" +
                         "	<a href='post.html?aid="+json.id+"'>"+json.tittle+"</a>\r\n" +
+                        "   <a href='#'  style=\"float: right;font-size: 30px\" onclick='art_delete("+json.id+")'> 删除</a>"+
                         "</h2>\r\n" +
                         "<ul class=\"arc-meta\">\r\n" +
                         "	<li><i class=\"mdi mdi-calendar\"></i>"+json.date+"</li>\r\n" +

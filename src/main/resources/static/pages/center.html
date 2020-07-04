@@ -219,7 +219,7 @@
 				currentImage = "../images/blog/9.jpg";
 				currentImage2 = "../images/blog/9.jpg";
 			}
-			$("div.lyear-wrapper").css({"background-image":"url("+currentImage+")","background-attachment": "fixed"});
+			$("body").css({"background-size":"100% 100%","background-image":"url("+currentImage+")","background-attachment": "fixed"});
 		});
 
 		jQuery.post("/allPI",function(rst){
